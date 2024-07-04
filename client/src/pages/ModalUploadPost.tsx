@@ -2,17 +2,23 @@
 import { disableModalUploadPost } from '../store/reducers/ModalReducer';
 import Carousel from 'react-bootstrap/Carousel';
 import  { useEffect, useState } from 'react';
-import { State, User } from '../interfaces';
+import { Post, State, User } from '../interfaces';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { getUserLogin } from '../services/userLogin.service';
+import { getUserLogin, setUserLogin } from '../services/userLogin.service';
 import axios from 'axios';
+import { ref,uploadBytes,getDownloadURL } from 'firebase/storage';
+import { storage } from '../config/firebase';
+import { v4 as uuidv4 } from 'uuid';
+import { updateUser } from '../services/user.service';
+import { addNewPost } from '../services/posts.service';
 export default function ModalUploadPost() {
     const userOnline:User=useSelector((state:State)=>state.userLogin)
     const navigate=useNavigate();
     const dispatch=useDispatch();
     const previewImages=useSelector((state:State)=>state.previewImages)
-    const [countChar,setCountChar]=useState<number>(0);
+    const imagesPost=useSelector((state:State)=>state.imagesPost);
+    const [contentPost,setContentPost]=useState<string>('');
     //load Page when user is not login or login
     useEffect(()=>{
         console.log(previewImages);
@@ -32,14 +38,44 @@ export default function ModalUploadPost() {
     }
     //get count Char
     const handleChange=(e:React.ChangeEvent<HTMLTextAreaElement>)=>{
-        setCountChar(e.target.value.length);
+        setContentPost(e.target.value);
+    }
+    //upload new Post
+    const uploadNewPost=()=>{
+      const newImgs:string[]=[];
+      for(let value of imagesPost){
+        const imageRef=ref(storage,`imagesPost/${value.name}`)
+        uploadBytes(imageRef, value).then((snapshot) => getDownloadURL(snapshot.ref))
+       .then((url) =>
+            {              
+             newImgs.push(url); 
+             if(newImgs.length===imagesPost.length){
+              let newPost:Post={
+                id:uuidv4(),
+                idUser:userOnline.id,
+                detail:contentPost,
+                date:new Date().getTime(),
+                fullDate:new Date().toISOString().split('T')[0],
+                images:newImgs,
+                comments:[],
+                favouristUsers:[], 
+               }             
+               let editUser:User={...userOnline,posts:[...userOnline.posts,newPost]};      
+               dispatch(setUserLogin(editUser));
+               dispatch(updateUser(editUser));
+               dispatch(addNewPost(newPost));
+               dispatch(disableModalUploadPost());
+             }                            
+            }
+       )
+      }       
     }
   return (
 <div className='modal'>
     <div onClick={closeModal} className='modal-close z-2'></div>
     <div className='flex flex-col gap-[20px] py-[20px] rounded-[10px] bg-white w-[800px] z-3'>
     <i onClick={closeModal} className="fa-solid fa-xmark z-3 text-[30px] cursor-pointer text-white top-[20px] right-[20px] absolute"></i>
-        <div className='text-[16px] font-bold text-center'>Tạo bài viết mới</div>
+        <div onClick={uploadNewPost} className='text-[16px] font-bold text-center text-orange-400 hover:text-orange-700 cursor-pointer'>Chia sẻ</div>
         <hr/>
         <div className='flex'>
             {/* Album ảnh vừa chọn */}
@@ -68,7 +104,7 @@ export default function ModalUploadPost() {
                 <div className='font-bold'>{userOnline.username} </div>
               </div>
               <textarea onChange={handleChange} maxLength={200} className='mt-[50px]' id="white-textarea" placeholder='Viết chú thích...'></textarea>
-              <p className='text-[14px] text-gray-500'>{countChar}/200 ký tự</p>
+              <p className='text-[14px] text-gray-500'>{contentPost.length}/200 ký tự</p>
            </div>
         </div>              
     </div>

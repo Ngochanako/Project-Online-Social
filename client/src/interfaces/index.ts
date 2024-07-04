@@ -8,7 +8,8 @@ export type Post={
     id:string,
     idUser:string,
     detail:string,
-    date:string,
+    date:number,
+    fullDate:string,
     images:string[],
     comments:Comment[],
     favouristUsers:User[],   
@@ -38,5 +39,6 @@ export type State={
     userLogin:User,
     register:User[],
     modal:Modal,
-    previewImages:string[]
+    previewImages:string[],
+    imagesPost:any[],
 }

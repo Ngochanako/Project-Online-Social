@@ -1,31 +1,30 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { disableModalAvatar } from '../store/reducers/ModalReducer';
 import { ref,uploadBytes,getDownloadURL } from 'firebase/storage';
 import { storage } from '../config/firebase';
+import { updateUser } from '../services/user.service';
+import { State, User } from '../interfaces';
+import { setUserLogin } from '../services/userLogin.service';
 export default function ModalAvatar() {
-    const [img,setImg]=useState<any>('');
-    const [nameImg,setNameImg]=useState<string>('');
     const dispatch=useDispatch();
+    const userOnline:User=useSelector((state:State)=>state.userLogin);
     const closeModal=()=>{
         dispatch(disableModalAvatar())
     }
     //upload img Avatar
     const handleChange=(e:React.ChangeEvent<HTMLInputElement>)=>{
-      const value=e.target.files?.[0]
-      setImg(value);
-      setNameImg(e.target.value);
-      const imageRef=ref(storage,`imagesPost/${img.name}`)
-      uploadBytes(imageRef, img).then((snapshot) => getDownloadURL(snapshot.ref))
+      const value:any=e.target.files?.[0]
+      const imageRef=ref(storage,`imagesPost/${value.name}`)
+      uploadBytes(imageRef, value).then((snapshot) => getDownloadURL(snapshot.ref))
      .then((url) =>
           {
-             const product={
-                 name:name,
-                 image:url
-             }
-             axios.post("http://localhost:3000/product",product)
+            const userUpdate:User={...userOnline,avatar:url}
+            dispatch(updateUser(userUpdate));
+            dispatch(setUserLogin(userUpdate));       
           }
      )
+     dispatch(disableModalAvatar())
     }
   return (
     <div className='modal'>

@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { User } from "../../interfaces";
-import { getUsers } from "../../services/user.service";
+import { getUsers, updateUser } from "../../services/user.service";
 import { registerUser } from "../../services/user.service";
 import axios from "axios";
 
@@ -16,6 +16,9 @@ const registerReducer=createSlice({
         })
         .addCase(registerUser.fulfilled,(state,action)=>{
             state.push(action.payload);
+        })
+        .addCase(updateUser.fulfilled,(state,action)=>{
+            return state.map(item=>item.id===action.payload.id?{...item,avatar:action.payload.avatar}:item)
         })
     }
 })

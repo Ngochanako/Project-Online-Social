@@ -2,34 +2,42 @@
 import { useSelector } from 'react-redux'
 import { State } from '../interfaces'
 import Button from 'react-bootstrap/Button';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { User } from '../interfaces';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { getUserLogin} from '../services/userLogin.service';
+import { getUserLogin, setUserLogin} from '../services/userLogin.service';
 import axios from 'axios';
 import { activeModalAvatar } from '../store/reducers/ModalReducer';
 import ModalAvatar from './ModalAvatar';
+import { Post } from '../interfaces';
+import { setUser } from '../store/reducers/UserReducer';
 export default function PersonalPage() {
     const userOnline:User=useSelector((state:State)=>state.userLogin);
     const modalAvatar=useSelector((state:State)=>state.modal.avatar);
     const navigate=useNavigate();
     const dispatch=useDispatch();
     //load Page when user is not login or login
-    useEffect(()=>{
-       dispatch(getUserLogin())
+    useEffect(()=>{ 
        axios.get("http://localhost:3000/userLogin")
        .then(response=>{
-          if(response.data.id!==''){
+          if(response.data.id!==''){      
           }else{
             navigate('/login')           
           }
        })
        .catch(err=>console.log(err))
     },[])
+    useEffect(()=>{
+      dispatch(getUserLogin())
+    },[userOnline])
     // open modal change Avatar
     const openModalAvatar=()=>{
       dispatch(activeModalAvatar());
+    }
+    //open Modal Post
+    const openModalModalPost=(idPost:string)=>{
+
     }
   return (
     <div className='p-[50px] ml-[260px]'>
@@ -43,9 +51,9 @@ export default function PersonalPage() {
                     <Button className='opacity-40 text-[14px]' variant="dark">Xem kho lưu trữ</Button>
                 </div>
                 <div className='flex gap-[40px]'>
-                    <div>1 bài viết</div>
-                    <div>0 người theo dõi</div> 
-                    <div>Đang theo dõi 12 người dùng</div>              
+                    <div><span className='font-bold'>{userOnline.posts.length}</span> bài viết</div>
+                    <div><span className='font-bold'>{userOnline.followersById.length}</span> người theo dõi</div> 
+                    <div>Đang theo dõi <span className='font-bold'>{userOnline.followUsersById.length}</span> người dùng</div>              
                 </div>
             </div>
         </header>
@@ -71,10 +79,9 @@ export default function PersonalPage() {
         </div>
       {/* Post start */}
        <div className='grid grid-cols-3 gap-[5px]'>
-        <img className='h-[300px] w-[300px] hover:opacity-85 cursor-pointer' src="https://i.pinimg.com/474x/80/ad/1a/80ad1aa65698a666a5508875820b758d.jpg" alt="" />
-        <img className='h-[300px] w-[300px]' src="https://i.pinimg.com/474x/80/ad/1a/80ad1aa65698a666a5508875820b758d.jpg" alt="" />
-        <img className='h-[300px] w-[300px]' src="https://i.pinimg.com/474x/80/ad/1a/80ad1aa65698a666a5508875820b758d.jpg" alt="" />
-          
+        {userOnline.posts.map((post:Post)=>(
+            <img key={post.id} onClick={()=>openModalModalPost(post.id)} className='h-[300px] w-[300px] hover:opacity-85 cursor-pointer' src={post.images[0]} alt="" />
+        ))}       
        </div>
       {/* Post end */}
     </div>

@@ -17,8 +17,22 @@ export const setUserLogin:any=createAsyncThunk(
 )
 export const resetUserLogin:any=createAsyncThunk(
     "users/resetUser",
-    async(user)=>{
-        const response= await axios.put("http://localhost:3000/userLogin",user)
+    async()=>{
+        const response= await axios.put("http://localhost:3000/userLogin",
+            {
+                id:'',
+                username:'',
+                password:'',
+                email:'',
+                avatar:'',
+                biography:'',
+                gender:'',
+                posts:[],
+                followersById:[],
+                followUsersById:[],
+                status:true,
+            }
+        )
         
         return response.data;
     }

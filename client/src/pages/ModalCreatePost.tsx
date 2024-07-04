@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { activeModalUploadPost, disableModalPost } from '../store/reducers/ModalReducer';
+import { activeModalUploadPost, disableModalPost, disableModalUploadPost } from '../store/reducers/ModalReducer';
 import { setPreviewImages } from '../store/reducers/PreviewImagesReducer';
+import { setImagesPost } from '../store/reducers/ImagesPostReducer';
 
 export default function ModalCreatePost() {
-    const [images, setImages] = useState([]);
+    const [images, setImages] = useState<any[]>([]);
     const dispatch=useDispatch();
     const closeModal=()=>{
         dispatch(disableModalPost());
@@ -15,16 +16,15 @@ export default function ModalCreatePost() {
         if(files){
             for (let i = 0; i < files.length; i++) {
                 const file = files[i];
+                images.push(file);
                 const src = URL.createObjectURL(file);
                 newPreviewImages.push(src);                      
             }           
-            console.log(newPreviewImages);
-                
+            dispatch(setImagesPost(images)) 
             dispatch(setPreviewImages(newPreviewImages));
             dispatch(disableModalPost());
             dispatch(activeModalUploadPost());
-        }
-    
+        } 
     }
   return (
     <div className='modal'>

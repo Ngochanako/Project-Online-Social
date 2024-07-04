@@ -5,38 +5,172 @@
       "username": "ngoc",
       "password": "Abc123",
       "email": "ngoc@gmail.com",
-      "avatar": "https://cellphones.com.vn/sforum/wp-content/uploads/2023/10/avatar-trang-4.jpg",
+      "avatar": "https://firebasestorage.googleapis.com/v0/b/online-social-2adfa.appspot.com/o/imagesPost%2F4.jpg?alt=media&token=68d6fff5-3dba-4504-9c88-60fe8122a10f",
       "biography": "",
       "gender": "",
-      "posts": [],
-      "followersById": [],
-      "followUsersById": [],
-      "status": true
-    },
-    {
-      "id": "c5f75d82-f6e7-4d24-95cb-fdc7925d81d8",
-      "username": "phuong",
-      "password": "Abc123",
-      "email": "noc@gmail.com",
-      "avatar": "https://cellphones.com.vn/sforum/wp-content/uploads/2023/10/avatar-trang-4.jpg",
-      "biography": "",
-      "gender": "",
-      "posts": [],
+      "posts": [
+        {
+          "id": "4065e20f-8ca1-4681-b424-df29201ff055",
+          "idUser": "4f5f04f5-fa61-46b9-8287-00555b09b018",
+          "detail": "",
+          "date": 1720106575268,
+          "fullDate": "2024-07-04",
+          "images": [
+            "https://firebasestorage.googleapis.com/v0/b/online-social-2adfa.appspot.com/o/imagesPost%2F4.jpg?alt=media&token=66639d7f-b7a3-4a23-8779-b25a5130b1af"
+          ],
+          "comments": [],
+          "favouristUsers": []
+        },
+        {
+          "id": "0a87f906-d438-4058-82d5-5081e6b7271a",
+          "idUser": "4f5f04f5-fa61-46b9-8287-00555b09b018",
+          "detail": "",
+          "date": 1720104490596,
+          "fullDate": "2024-07-04",
+          "images": [
+            "https://firebasestorage.googleapis.com/v0/b/online-social-2adfa.appspot.com/o/imagesPost%2F3.jpg?alt=media&token=fcfec018-665e-49f7-9b88-d73bb9472a7e"
+          ],
+          "comments": [],
+          "favouristUsers": []
+        },
+        {
+          "id": "8fba5b89-3974-4e2f-9e26-23413cb644e0",
+          "idUser": "4f5f04f5-fa61-46b9-8287-00555b09b018",
+          "detail": "",
+          "date": 1720104474494,
+          "fullDate": "2024-07-04",
+          "images": [
+            "https://firebasestorage.googleapis.com/v0/b/online-social-2adfa.appspot.com/o/imagesPost%2F1.jpg?alt=media&token=8481704d-1814-4c71-ad50-306d7668a43c"
+          ],
+          "comments": [],
+          "favouristUsers": []
+        },
+        {
+          "id": "6a293520-14f3-4d75-8916-898c24cf84e5",
+          "idUser": "4f5f04f5-fa61-46b9-8287-00555b09b018",
+          "detail": "",
+          "date": 1720106703963,
+          "fullDate": "2024-07-04",
+          "images": [
+            "https://firebasestorage.googleapis.com/v0/b/online-social-2adfa.appspot.com/o/imagesPost%2FNguy%E1%BB%85n%20Th%E1%BB%8B%20Ng%E1%BB%8Dc.jpg?alt=media&token=41d90280-3ad2-4c8a-8f17-d1cf860fc203"
+          ],
+          "comments": [],
+          "favouristUsers": []
+        }
+      ],
       "followersById": [],
       "followUsersById": [],
       "status": true
     }
   ],
-  "posts": [],
+  "posts": [
+    {
+      "id": "8fba5b89-3974-4e2f-9e26-23413cb644e0",
+      "idUser": "4f5f04f5-fa61-46b9-8287-00555b09b018",
+      "detail": "",
+      "date": 1720104474494,
+      "fullDate": "2024-07-04",
+      "images": [
+        "https://firebasestorage.googleapis.com/v0/b/online-social-2adfa.appspot.com/o/imagesPost%2F1.jpg?alt=media&token=8481704d-1814-4c71-ad50-306d7668a43c"
+      ],
+      "comments": [],
+      "favouristUsers": []
+    },
+    {
+      "id": "0a87f906-d438-4058-82d5-5081e6b7271a",
+      "idUser": "4f5f04f5-fa61-46b9-8287-00555b09b018",
+      "detail": "",
+      "date": 1720104490596,
+      "fullDate": "2024-07-04",
+      "images": [
+        "https://firebasestorage.googleapis.com/v0/b/online-social-2adfa.appspot.com/o/imagesPost%2F3.jpg?alt=media&token=fcfec018-665e-49f7-9b88-d73bb9472a7e"
+      ],
+      "comments": [],
+      "favouristUsers": []
+    },
+    {
+      "id": "4065e20f-8ca1-4681-b424-df29201ff055",
+      "idUser": "4f5f04f5-fa61-46b9-8287-00555b09b018",
+      "detail": "",
+      "date": 1720106575268,
+      "fullDate": "2024-07-04",
+      "images": [
+        "https://firebasestorage.googleapis.com/v0/b/online-social-2adfa.appspot.com/o/imagesPost%2F4.jpg?alt=media&token=66639d7f-b7a3-4a23-8779-b25a5130b1af"
+      ],
+      "comments": [],
+      "favouristUsers": []
+    },
+    {
+      "id": "6a293520-14f3-4d75-8916-898c24cf84e5",
+      "idUser": "4f5f04f5-fa61-46b9-8287-00555b09b018",
+      "detail": "",
+      "date": 1720106703963,
+      "fullDate": "2024-07-04",
+      "images": [
+        "https://firebasestorage.googleapis.com/v0/b/online-social-2adfa.appspot.com/o/imagesPost%2FNguy%E1%BB%85n%20Th%E1%BB%8B%20Ng%E1%BB%8Dc.jpg?alt=media&token=41d90280-3ad2-4c8a-8f17-d1cf860fc203"
+      ],
+      "comments": [],
+      "favouristUsers": []
+    }
+  ],
   "userLogin": {
     "id": "4f5f04f5-fa61-46b9-8287-00555b09b018",
     "username": "ngoc",
     "password": "Abc123",
     "email": "ngoc@gmail.com",
-    "avatar": "https://cellphones.com.vn/sforum/wp-content/uploads/2023/10/avatar-trang-4.jpg",
+    "avatar": "https://firebasestorage.googleapis.com/v0/b/online-social-2adfa.appspot.com/o/imagesPost%2F4.jpg?alt=media&token=68d6fff5-3dba-4504-9c88-60fe8122a10f",
     "biography": "",
     "gender": "",
-    "posts": [],
+    "posts": [
+      {
+        "id": "4065e20f-8ca1-4681-b424-df29201ff055",
+        "idUser": "4f5f04f5-fa61-46b9-8287-00555b09b018",
+        "detail": "",
+        "date": 1720106575268,
+        "fullDate": "2024-07-04",
+        "images": [
+          "https://firebasestorage.googleapis.com/v0/b/online-social-2adfa.appspot.com/o/imagesPost%2F4.jpg?alt=media&token=66639d7f-b7a3-4a23-8779-b25a5130b1af"
+        ],
+        "comments": [],
+        "favouristUsers": []
+      },
+      {
+        "id": "0a87f906-d438-4058-82d5-5081e6b7271a",
+        "idUser": "4f5f04f5-fa61-46b9-8287-00555b09b018",
+        "detail": "",
+        "date": 1720104490596,
+        "fullDate": "2024-07-04",
+        "images": [
+          "https://firebasestorage.googleapis.com/v0/b/online-social-2adfa.appspot.com/o/imagesPost%2F3.jpg?alt=media&token=fcfec018-665e-49f7-9b88-d73bb9472a7e"
+        ],
+        "comments": [],
+        "favouristUsers": []
+      },
+      {
+        "id": "8fba5b89-3974-4e2f-9e26-23413cb644e0",
+        "idUser": "4f5f04f5-fa61-46b9-8287-00555b09b018",
+        "detail": "",
+        "date": 1720104474494,
+        "fullDate": "2024-07-04",
+        "images": [
+          "https://firebasestorage.googleapis.com/v0/b/online-social-2adfa.appspot.com/o/imagesPost%2F1.jpg?alt=media&token=8481704d-1814-4c71-ad50-306d7668a43c"
+        ],
+        "comments": [],
+        "favouristUsers": []
+      },
+      {
+        "id": "6a293520-14f3-4d75-8916-898c24cf84e5",
+        "idUser": "4f5f04f5-fa61-46b9-8287-00555b09b018",
+        "detail": "",
+        "date": 1720106703963,
+        "fullDate": "2024-07-04",
+        "images": [
+          "https://firebasestorage.googleapis.com/v0/b/online-social-2adfa.appspot.com/o/imagesPost%2FNguy%E1%BB%85n%20Th%E1%BB%8B%20Ng%E1%BB%8Dc.jpg?alt=media&token=41d90280-3ad2-4c8a-8f17-d1cf860fc203"
+        ],
+        "comments": [],
+        "favouristUsers": []
+      }
+    ],
     "followersById": [],
     "followUsersById": [],
     "status": true
