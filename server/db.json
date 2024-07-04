@@ -1,0 +1,44 @@
+{
+  "users": [
+    {
+      "id": "4f5f04f5-fa61-46b9-8287-00555b09b018",
+      "username": "ngoc",
+      "password": "Abc123",
+      "email": "ngoc@gmail.com",
+      "avatar": "https://cellphones.com.vn/sforum/wp-content/uploads/2023/10/avatar-trang-4.jpg",
+      "biography": "",
+      "gender": "",
+      "posts": [],
+      "followersById": [],
+      "followUsersById": [],
+      "status": true
+    },
+    {
+      "id": "c5f75d82-f6e7-4d24-95cb-fdc7925d81d8",
+      "username": "phuong",
+      "password": "Abc123",
+      "email": "noc@gmail.com",
+      "avatar": "https://cellphones.com.vn/sforum/wp-content/uploads/2023/10/avatar-trang-4.jpg",
+      "biography": "",
+      "gender": "",
+      "posts": [],
+      "followersById": [],
+      "followUsersById": [],
+      "status": true
+    }
+  ],
+  "posts": [],
+  "userLogin": {
+    "id": "4f5f04f5-fa61-46b9-8287-00555b09b018",
+    "username": "ngoc",
+    "password": "Abc123",
+    "email": "ngoc@gmail.com",
+    "avatar": "https://cellphones.com.vn/sforum/wp-content/uploads/2023/10/avatar-trang-4.jpg",
+    "biography": "",
+    "gender": "",
+    "posts": [],
+    "followersById": [],
+    "followUsersById": [],
+    "status": true
+  }
+}
