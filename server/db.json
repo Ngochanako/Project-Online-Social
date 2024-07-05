@@ -19,7 +19,7 @@
             "https://firebasestorage.googleapis.com/v0/b/online-social-2adfa.appspot.com/o/imagesPost%2F4.jpg?alt=media&token=66639d7f-b7a3-4a23-8779-b25a5130b1af"
           ],
           "comments": [],
-          "favouristUsers": []
+          "favouristUsersById": []
         },
         {
           "id": "0a87f906-d438-4058-82d5-5081e6b7271a",
@@ -31,7 +31,7 @@
             "https://firebasestorage.googleapis.com/v0/b/online-social-2adfa.appspot.com/o/imagesPost%2F3.jpg?alt=media&token=fcfec018-665e-49f7-9b88-d73bb9472a7e"
           ],
           "comments": [],
-          "favouristUsers": []
+          "favouristUsersById": []
         },
         {
           "id": "8fba5b89-3974-4e2f-9e26-23413cb644e0",
@@ -43,7 +43,7 @@
             "https://firebasestorage.googleapis.com/v0/b/online-social-2adfa.appspot.com/o/imagesPost%2F1.jpg?alt=media&token=8481704d-1814-4c71-ad50-306d7668a43c"
           ],
           "comments": [],
-          "favouristUsers": []
+          "favouristUsersById": []
         },
         {
           "id": "6a293520-14f3-4d75-8916-898c24cf84e5",
@@ -55,7 +55,7 @@
             "https://firebasestorage.googleapis.com/v0/b/online-social-2adfa.appspot.com/o/imagesPost%2FNguy%E1%BB%85n%20Th%E1%BB%8B%20Ng%E1%BB%8Dc.jpg?alt=media&token=41d90280-3ad2-4c8a-8f17-d1cf860fc203"
           ],
           "comments": [],
-          "favouristUsers": []
+          "favouristUsersById": []
         }
       ],
       "followersById": [],
@@ -74,7 +74,7 @@
         "https://firebasestorage.googleapis.com/v0/b/online-social-2adfa.appspot.com/o/imagesPost%2F1.jpg?alt=media&token=8481704d-1814-4c71-ad50-306d7668a43c"
       ],
       "comments": [],
-      "favouristUsers": []
+      "favouristUsersById": []
     },
     {
       "id": "0a87f906-d438-4058-82d5-5081e6b7271a",
@@ -86,7 +86,7 @@
         "https://firebasestorage.googleapis.com/v0/b/online-social-2adfa.appspot.com/o/imagesPost%2F3.jpg?alt=media&token=fcfec018-665e-49f7-9b88-d73bb9472a7e"
       ],
       "comments": [],
-      "favouristUsers": []
+      "favouristUsersById": []
     },
     {
       "id": "4065e20f-8ca1-4681-b424-df29201ff055",
@@ -98,7 +98,7 @@
         "https://firebasestorage.googleapis.com/v0/b/online-social-2adfa.appspot.com/o/imagesPost%2F4.jpg?alt=media&token=66639d7f-b7a3-4a23-8779-b25a5130b1af"
       ],
       "comments": [],
-      "favouristUsers": []
+      "favouristUsersById": []
     },
     {
       "id": "6a293520-14f3-4d75-8916-898c24cf84e5",
@@ -110,7 +110,7 @@
         "https://firebasestorage.googleapis.com/v0/b/online-social-2adfa.appspot.com/o/imagesPost%2FNguy%E1%BB%85n%20Th%E1%BB%8B%20Ng%E1%BB%8Dc.jpg?alt=media&token=41d90280-3ad2-4c8a-8f17-d1cf860fc203"
       ],
       "comments": [],
-      "favouristUsers": []
+      "favouristUsersById": []
     }
   ],
   "userLogin": {
@@ -132,7 +132,7 @@
           "https://firebasestorage.googleapis.com/v0/b/online-social-2adfa.appspot.com/o/imagesPost%2F4.jpg?alt=media&token=66639d7f-b7a3-4a23-8779-b25a5130b1af"
         ],
         "comments": [],
-        "favouristUsers": []
+        "favouristUsersById": []
       },
       {
         "id": "0a87f906-d438-4058-82d5-5081e6b7271a",
@@ -144,7 +144,7 @@
           "https://firebasestorage.googleapis.com/v0/b/online-social-2adfa.appspot.com/o/imagesPost%2F3.jpg?alt=media&token=fcfec018-665e-49f7-9b88-d73bb9472a7e"
         ],
         "comments": [],
-        "favouristUsers": []
+        "favouristUsersById": []
       },
       {
         "id": "8fba5b89-3974-4e2f-9e26-23413cb644e0",
@@ -156,7 +156,7 @@
           "https://firebasestorage.googleapis.com/v0/b/online-social-2adfa.appspot.com/o/imagesPost%2F1.jpg?alt=media&token=8481704d-1814-4c71-ad50-306d7668a43c"
         ],
         "comments": [],
-        "favouristUsers": []
+        "favouristUsersById": []
       },
       {
         "id": "6a293520-14f3-4d75-8916-898c24cf84e5",
@@ -168,7 +168,7 @@
           "https://firebasestorage.googleapis.com/v0/b/online-social-2adfa.appspot.com/o/imagesPost%2FNguy%E1%BB%85n%20Th%E1%BB%8B%20Ng%E1%BB%8Dc.jpg?alt=media&token=41d90280-3ad2-4c8a-8f17-d1cf860fc203"
         ],
         "comments": [],
-        "favouristUsers": []
+        "favouristUsersById": []
       }
     ],
     "followersById": [],

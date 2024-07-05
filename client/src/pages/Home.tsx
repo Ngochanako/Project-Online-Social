@@ -7,8 +7,10 @@ import ModalCreatePost from "./ModalCreatePost";
 import { State } from "../interfaces";
 import { activeModalPost } from "../store/reducers/ModalReducer";
 import ModalUploadPost from "./ModalUploadPost";
+import ModalAllComment from "./ModalAllComment";
 export default function Home() {
     //Initialization
+    const modalAllComment=useSelector((state:State)=>state.modal.comments);
     const [viewmore,setViewmore]=useState<boolean>(false);
     const navigate=useNavigate();
     const dispatch=useDispatch();
@@ -48,6 +50,7 @@ export default function Home() {
   }
   return (
     <div className=''>
+       {modalAllComment &&<ModalAllComment/>}
         {modalPost && <ModalCreatePost/>}
         {modalUploadPost && <ModalUploadPost/>}
         {/* Header left start */}

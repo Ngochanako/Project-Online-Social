@@ -8,10 +8,11 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { getUserLogin, setUserLogin} from '../services/userLogin.service';
 import axios from 'axios';
-import { activeModalAvatar } from '../store/reducers/ModalReducer';
+import { activeModalAllComment, activeModalAvatar, activeModalPost } from '../store/reducers/ModalReducer';
 import ModalAvatar from './ModalAvatar';
 import { Post } from '../interfaces';
 import { setUser } from '../store/reducers/UserReducer';
+import { setPost } from '../store/reducers/PostReducer';
 export default function PersonalPage() {
     const userOnline:User=useSelector((state:State)=>state.userLogin);
     const modalAvatar=useSelector((state:State)=>state.modal.avatar);
@@ -37,9 +38,13 @@ export default function PersonalPage() {
     }
     //open Modal Post
     const openModalModalPost=(idPost:string)=>{
-
+        axios.get(`http://localhost:3000/posts?id=${idPost}`)
+        .then(response=>dispatch(setPost(response.data[0])))
+        .then(()=>dispatch(activeModalAllComment()))
+        .catch(err=>console.log(err))
     }
   return (
+
     <div className='p-[50px] ml-[260px]'>
       {modalAvatar&&<ModalAvatar/>}
         <header className='px-[40px] flex gap-[80px] items-center'>

@@ -6,7 +6,7 @@ import { State } from '../interfaces';
 import { activeModalAllComment } from '../store/reducers/ModalReducer';
 export default function Posts() {
      //Initialization
-     const modalAllComment=useSelector((state:State)=>state.modal.comments);
+    
      const dispatch=useDispatch();
      //open Modal All Comment
      const viewComments=()=>{
@@ -15,7 +15,7 @@ export default function Posts() {
   return (
     <div className='w-[70%]'>
       {/* Modal All Comment Start */}
-      {modalAllComment &&<ModalAllComment/>}
+     
       {/* Reel start */}
       {/* Reel end */}
       {/* Posts start */}

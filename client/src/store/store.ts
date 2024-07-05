@@ -5,6 +5,7 @@ import RegisterReducer from "./reducers/UsersReducer";
 import ModalReducer from "./reducers/ModalReducer";
 import PreviewImagesReducer from "./reducers/PreviewImagesReducer";
 import ImagesPostReducer from "./reducers/ImagesPostReducer";
+import PostReducer from "./reducers/PostReducer";
 
 export const store=configureStore({
     reducer:{
@@ -14,5 +15,6 @@ export const store=configureStore({
         modal:ModalReducer,
         previewImages:PreviewImagesReducer,
         imagesPost:ImagesPostReducer,
+        post:PostReducer,
     }
 })

@@ -11,7 +11,7 @@ const modalReducer=createSlice({
     name:"modal",
     initialState:initialModal,
     reducers:{
-        activeModalAllComment:(state)=>{
+        activeModalAllComment:(state)=>{          
             state.comments=true;
         },
         disableModalAllComment:(state)=>{
