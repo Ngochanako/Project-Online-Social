@@ -9,7 +9,7 @@ const initialUser:User={
     avatar:'',
     biography:'',
     gender:'',
-    posts:[],
+    postsById:[],
     followersById:[],
     followUsersById:[],
     status:true,

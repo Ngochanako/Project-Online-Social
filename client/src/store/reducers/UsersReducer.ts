@@ -1,13 +1,13 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { User } from "../../interfaces";
-import { getUsers, updateUser } from "../../services/user.service";
-import { registerUser } from "../../services/user.service";
+import { getUsers, updateUser } from "../../services/users.service";
+import { registerUser } from "../../services/users.service";
 import axios from "axios";
 
-const initialRegisterUsers:User[]=[];
+const initialUsers:User[]=[];
 const registerReducer=createSlice({
     name:'register',
-    initialState:initialRegisterUsers,
+    initialState:initialUsers,
     reducers:{},
     extraReducers(builder){
         builder

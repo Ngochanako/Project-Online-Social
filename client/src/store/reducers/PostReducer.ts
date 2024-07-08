@@ -4,11 +4,13 @@ import { Post } from "../../interfaces";
 const initialPost:Post={
     id:'',
     idUser:'',
+    avatarUser:'',
+    userNameUser:'',
     detail:'',
     date:0,
     fullDate:'',
     images:[],
-    comments:[],
+    commentsById:[],
     favouristUsersById:[], 
 }
 const postReducer=createSlice({

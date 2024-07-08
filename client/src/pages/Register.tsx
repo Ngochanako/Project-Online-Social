@@ -3,10 +3,10 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useDispatch, useSelector } from 'react-redux';
 import { State, User } from '../interfaces';
-import { getUsers } from '../services/user.service';
+import { getUsers } from '../services/users.service';
 import Alert from 'react-bootstrap/Alert';
 import { v4 as uuidv4 } from 'uuid';
-import { registerUser } from '../services/user.service';
+import { registerUser } from '../services/users.service';
 import { useNavigate } from 'react-router-dom';
 import { setUser } from '../store/reducers/UserReducer';
 import axios from 'axios';
@@ -30,7 +30,7 @@ export default function Register() {
     avatar:'',
     biography:'',
     gender:'',
-    posts:[],
+    postsById:[],
     followersById:[],
     followUsersById:[],
     status:true,
@@ -45,7 +45,7 @@ export default function Register() {
     avatar:'',
     biography:'',
     gender:'',
-    posts:[],
+    postsById:[],
     followersById:[],
     followUsersById:[],
     status:true,

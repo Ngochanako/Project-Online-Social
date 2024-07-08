@@ -37,3 +37,10 @@ export const resetUserLogin:any=createAsyncThunk(
         return response.data;
     }
 )
+export const updateFollowersUserLogin:any=createAsyncThunk(
+    "users/updateFollowersUserLogin",
+    async(user)=>{
+        const response=await axios.put("http://localhost:3000/userLogin",user);
+        return response.data;
+     }
+)

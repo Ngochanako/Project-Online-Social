@@ -11,11 +11,13 @@ import axios from 'axios';
 import { activeModalAllComment, activeModalAvatar, activeModalPost } from '../store/reducers/ModalReducer';
 import ModalAvatar from './ModalAvatar';
 import { Post } from '../interfaces';
-import { setUser } from '../store/reducers/UserReducer';
 import { setPost } from '../store/reducers/PostReducer';
+import { getPosts } from '../services/posts.service';
 export default function PersonalPage() {
     const userOnline:User=useSelector((state:State)=>state.userLogin);
     const modalAvatar=useSelector((state:State)=>state.modal.avatar);
+    const posts=useSelector((state:State)=>state.posts);
+    const [postsByUserOnline,setPostsByUserOnline]=useState<Post[]>([]);
     const navigate=useNavigate();
     const dispatch=useDispatch();
     //load Page when user is not login or login
@@ -29,9 +31,29 @@ export default function PersonalPage() {
        })
        .catch(err=>console.log(err))
     },[])
+     
     useEffect(()=>{
       dispatch(getUserLogin())
-    },[userOnline])
+    },[])
+    useEffect(()=>{
+      dispatch(getPosts());
+    },[])
+    //get posts by UserOnline
+    
+    useEffect(()=>{
+      let newPosts:Post[]=[];
+      const postsById=userOnline.postsById;     
+      for(let btn of postsById){
+        let newPost:Post|undefined=posts.find(item=>item.id===btn)
+        if(newPost){  
+           newPosts.push(newPost)
+         }
+      }  
+      setPostsByUserOnline(newPosts)   ;   
+    },[posts]) 
+      
+     
+        
     // open modal change Avatar
     const openModalAvatar=()=>{
       dispatch(activeModalAvatar());
@@ -56,7 +78,7 @@ export default function PersonalPage() {
                     <Button className='opacity-40 text-[14px]' variant="dark">Xem kho lưu trữ</Button>
                 </div>
                 <div className='flex gap-[40px]'>
-                    <div><span className='font-bold'>{userOnline.posts.length}</span> bài viết</div>
+                    <div><span className='font-bold'>{userOnline.postsById.length}</span> bài viết</div>
                     <div><span className='font-bold'>{userOnline.followersById.length}</span> người theo dõi</div> 
                     <div>Đang theo dõi <span className='font-bold'>{userOnline.followUsersById.length}</span> người dùng</div>              
                 </div>
@@ -84,9 +106,9 @@ export default function PersonalPage() {
         </div>
       {/* Post start */}
        <div className='grid grid-cols-3 gap-[5px]'>
-        {userOnline.posts.map((post:Post)=>(
+         {postsByUserOnline.sort((a,b)=>b.date-a.date).map((post:Post)=>(
             <img key={post.id} onClick={()=>openModalModalPost(post.id)} className='h-[300px] w-[300px] hover:opacity-85 cursor-pointer' src={post.images[0]} alt="" />
-        ))}       
+        ))}        
        </div>
       {/* Post end */}
     </div>

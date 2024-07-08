@@ -13,7 +13,7 @@ export const registerUser:any=createAsyncThunk(
 export const getUsers:any=createAsyncThunk(
     "users/getUsers",
     async()=>{
-        const response= await axios.get("http://localhost:3000/users");
+        const response= await axios.get("http://localhost:3000/users");       
         return response.data;
     }
 )
@@ -21,7 +21,13 @@ export const updateUser:any=createAsyncThunk(
     "users/updateAvatar",
     async(user:User)=>{
         const response=await axios.put(`http://localhost:3000/users/${user.id}`,user);
-        console.log(response.data);
+        return response.data;
+    }
+)
+export const updateFollowersUser:any=createAsyncThunk(
+    "users/updateFollowers",
+    async(user:User)=>{
+        const response=await axios.put(`http://localhost:3000/users/${user.id}`,user);
         
         return response.data;
     }

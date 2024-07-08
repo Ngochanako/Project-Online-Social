@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { disableModalAvatar } from '../store/reducers/ModalReducer';
 import { ref,uploadBytes,getDownloadURL } from 'firebase/storage';
 import { storage } from '../config/firebase';
-import { updateUser } from '../services/user.service';
+import { updateUser } from '../services/users.service';
 import { State, User } from '../interfaces';
 import { setUserLogin } from '../services/userLogin.service';
 export default function ModalAvatar() {

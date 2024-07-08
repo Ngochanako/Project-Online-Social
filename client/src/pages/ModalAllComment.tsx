@@ -2,12 +2,17 @@ import React, { useEffect, useState } from 'react'
 import Carousel from 'react-bootstrap/Carousel';
 import { useDispatch, useSelector } from 'react-redux';
 import { disableModalAllComment } from '../store/reducers/ModalReducer';
-import { Post, State } from '../interfaces';
+import { CommentChild, CommentParent, Post, State } from '../interfaces';
 import axios from 'axios';
 import { setPost } from '../store/reducers/PostReducer';
 import { v4 as uuidv4 } from 'uuid';
-
+import { addNewCommentParent, getCommentsParent, updateCommentsParent } from '../services/commentsParent.service';
+import { addNewCommentChild, getCommentsChild } from '../services/commentsChild.service';
+import { getPosts, updatePosts } from '../services/posts.service';
+import { convertTime } from '../interfaces/convertTime';
 export default function ModalAllComment() {
+    const commentsChild=useSelector((state:State)=>state.commentsChild);
+    const commentsParent=useSelector((state:State)=>state.commentsParent);
     const userOnline=useSelector((state:State)=>state.userLogin)
     const dispatch=useDispatch();
     const post:Post=useSelector((state:State)=>state.post);
@@ -15,7 +20,33 @@ export default function ModalAllComment() {
     const [visibleComments,setVisibleComment]=useState<{idComment:string,visible:number}>({idComment:'',visible:1});
     const [idCommentViewMore,setIdCommentViewMore]=useState<string>('');
     const [valueComment, setValueComment]=useState<string>('');
-    const [idCommentPost,setIdCommentPost]=useState<string>('')
+    const [typeCommentPost,setTypeCommentPost]=useState<{type:string,id:string,userName:string}>({type:'',id:'',userName:''});
+    const [commentsParentUser,setCommentsParentUser]=useState<CommentParent[]>([]);
+    //get CommentParent from API
+    useEffect(()=>{
+       dispatch(getCommentsParent());
+    },[])
+     //get CommentChild from API
+     useEffect(()=>{
+        dispatch(getCommentsChild());
+     },[])
+    //get CommentParent of Post
+    useEffect(()=>{
+        let newCommentsParent:CommentParent[]=[];
+        for(let btn of post.commentsById){
+            let newCommentParent=commentsParent.find(item=>item.id===btn);
+            if(newCommentParent){
+                newCommentsParent.push(newCommentParent);
+            }
+        }
+        setCommentsParentUser(newCommentsParent);
+    },[commentsParent])
+    //get CommentsChild of Post
+    const commentsChildUser=(comments:string[])=>{
+        let newCommentsChild:CommentChild[]=commentsChild.filter((btn)=>comments.includes(btn.id));
+        return newCommentsChild;
+    }
+    // get user of Post
     useEffect(()=>{
         axios.get(`http://localhost:3000/users/${post.idUser}`)
         .then(response=>setUser(response.data))
@@ -42,28 +73,76 @@ export default function ModalAllComment() {
                 favouristUsersById:post.favouristUsersById.filter(btn=>btn!==userOnline.id)
             }
             dispatch(setPost(newPost));
+            dispatch(updatePosts(newPost));
         }else{
             let newPost={
                 ...post,
                 favouristUsersById:[...post.favouristUsersById,userOnline.id]
             }
             dispatch(setPost(newPost));
+            dispatch(updatePosts(newPost));
         }
     }
     //handleChange Comment
     const handleChangeComment=(e:React.ChangeEvent<HTMLTextAreaElement>)=>{
         let value=e.target.value;
+        if(value==''){
+            setTypeCommentPost({type:'',id:'',userName:''})
+        }
         setValueComment(value);
     }
     // post Comment
-    const postComment=()=>{
-        if(valueComment==''){
-            let newComment={
+    const postComment=(e:React.FormEvent)=>{
+        e.preventDefault();
+        if(typeCommentPost.type==''){
+            let newComment:CommentParent={
                 id:uuidv4(),
-                
+                idUser:userOnline.id,
+                avatarUser:userOnline.avatar,
+                userNameUser:userOnline.username,
+                postId:post.id,
+                detail:valueComment,
+                date:new Date().getTime(),
+                commentsById:[]
             }
+            dispatch(addNewCommentParent(newComment));
+            let updatePost:Post={
+                ...post,
+                commentsById:[...post.commentsById,newComment.id]
+            }
+            dispatch(updatePosts(updatePost));
+            dispatch(setPost(updatePost));
+        }else if (typeCommentPost.type==='replyParent'){
+            let newComment:CommentChild={
+                id:uuidv4(),
+                idUser:userOnline.id,
+                avatarUser:userOnline.avatar,
+                userNameUser:userOnline.username,
+                postId:post.id,
+                idParent:typeCommentPost.id,
+                userNameParent:typeCommentPost.userName,
+                detail:valueComment,
+                date:new Date().getTime()
+            }
+            dispatch(addNewCommentChild(newComment));
+            
+            axios.get(`http://localhost:3000/commentsParent/${typeCommentPost.id}`)
+            .then(response=>{
+                let updateCommentParent:CommentParent={...response.data,commentsById:[...response.data.commentsById,newComment.id]};
+                dispatch(updateCommentsParent(updateCommentParent))
+                dispatch(getPosts());
+            })
+            .catch(err=>console.log(err))
         }
+        setValueComment('');
+        setTypeCommentPost({type:'',id:'',userName:''});
     }
+    //reply Comment
+    const replyComment=(idComment:string,usernameParent:string)=>{
+        setTypeCommentPost({type:'replyParent',id:idComment,userName:usernameParent});
+        setValueComment(`@${usernameParent} `);
+    }
+    
   return (
     <div className='modal'>
         <div onClick={closeModal} className='modal-close'></div>
@@ -85,41 +164,41 @@ export default function ModalAllComment() {
             <div className='flex flex-col gap-[10px] p-[10px] w-[420px]'>
                 <div className='flex items-center'>
                         <img className='w-[50px] h-[50px] rounded-[50%]' src={user.avatar} alt="" />
-                        <div className='font-bold'>{user.username} {userOnline.id!==user.id?(<span onClick={followUser} className='text-[rgb(79,70,229)] font-bold'>Theo dõi</span>):('')}</div>
+                        <div className='font-bold'>{user.username} {!userOnline.followUsersById.includes(user.id)?(<span onClick={followUser} className='text-[rgb(79,70,229)] font-bold'>Theo dõi</span>):('')}</div>
                 </div>
                 <hr />
                  {/* All comment start */}
                  <div className='all-comment flex flex-col gap-[15px] overflow-auto max-h-[250px]'> 
-                    {post.comments.map(btn=>(
+                    {commentsParentUser.length===0&&<div className='text-orange-400 font-bold text-[14px] text-center text-opacity-90 italic'>Chưa có bình luận nào cho bài viết này !</div>}
+                    {commentsParentUser.map(btn=>(
                         <div key={btn.id} className='flex flex-col'>
                             <div className='flex justify-between items-center'>
                                 <div className='flex items-center'>
                                     <img className='w-[50px] h-[50px] rounded-[50%]' src={btn.avatarUser} alt="" />
                                     <div>
-                                        <p className='font-bold'>{btn.userNameUser}<span className='text-[14px] font-normal'> {btn.detail}</span></p>
+                                        <p className='text-[14px] font-bold'>{btn.userNameUser}<span className='text-[14px] font-normal'> {btn.detail}</span> </p>
                                         <div className='flex gap-[20px] text-gray-500 text-[12px]'>
-                                            <div>{Math.ceil(new Date().getTime()-btn.date)/(1000*60*60)} h</div>
-                                            <div>Trả lời</div>
+                                            <div>{convertTime((new Date().getTime()-btn.date)/60000)}</div>
+                                            <div onClick={()=>replyComment(btn.id,btn.userNameUser)} className='hover:text-gray-800 cursor-pointer'>Trả lời</div>
                                         </div>
                                     </div>
                                 </div>
                                 <i className='bx bx-heart' ></i>
                             </div>
-                            {btn.comments.length>0?
+                            {commentsChildUser(btn.commentsById).length>0?
                                (<div className='flex gap-[20px] text-gray-500 font-bold text-[12px]'>
                                    <div>------------</div>
-                                   <div>
-                                        <div onClick={()=>viewMoreComment(btn.id)}>Xem thêm bình luận ({btn.comments.length})</div>
+                                   <div>                                     
                                         <div className={idCommentViewMore===btn.id?'flex flex-col gap-[10px]':'hidden flex flex-col gap-[10px]'}>
-                                            {btn.comments.slice(0,visibleComments.visible).map(item=>(
-                                            <div className='flex justify-between items-center'>
+                                            {commentsChildUser(btn.commentsById).slice(0,visibleComments.visible).map(item=>(
+                                            <div className='flex justify-between items-center' key={item.id}>
                                                 <div className='flex items-center'>
                                                     <img className='w-[50px] h-[50px] rounded-[50%]' src={item.avatarUser} alt="" />
                                                     <div>
-                                                        <p className='font-bold'>{item.userNameUser}<span className='text-[14px] font-normal'><span className='font-bold'> @{item.userNameParent}</span>{item.detail}</span></p>
+                                                        <p> {item.detail}</p>
                                                         <div className='flex gap-[20px] text-gray-500 text-[12px]'>
-                                                            <div>{Math.ceil(new Date().getTime()-btn.date)/(1000*60*60)} h</div>
-                                                            <div>Trả lời</div>
+                                                            <div>{convertTime((new Date().getTime()-item.date)/60000)}</div>
+                                                            <div onClick={()=>replyComment(btn.id,item.userNameUser)}  className='hover:text-gray-800 cursor-pointer'>Trả lời</div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -128,6 +207,7 @@ export default function ModalAllComment() {
                                             ))}
                                             
                                         </div>
+                                        <div className='hover:text-gray-800 cursor-pointer' onClick={()=>viewMoreComment(btn.id)}>Xem thêm bình luận ({btn.commentsById.length})</div>
                                     </div>
                                   
                                </div>):('')
@@ -135,57 +215,7 @@ export default function ModalAllComment() {
                         </div>
                         
                     ))}     
-                    <div className='flex flex-col'>
-                            <div className='flex justify-between items-center'>
-                                <div className='flex items-center'>
-                                    <img className='w-[50px] h-[50px] rounded-[50%]' src={userOnline.avatar} alt="" />
-                                    <div>
-                                        <p className='font-bold'>aaaa<span className='text-[14px] font-normal'> linh tinh</span></p>
-                                        <div className='flex gap-[20px] text-gray-500 text-[12px]'>
-                                            <div>20 h</div>
-                                            <div>Trả lời</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <i className='bx bx-heart' ></i>
-                            </div>
-                           
-                               <div className='flex gap-[20px] text-gray-500 font-bold text-[12px]'>
-                                   <div>-------------</div>
-                                    <div>
-                                        <div>Xem thêm bình luận(7)</div>
-                                        <div>
-                                        <div className='flex justify-between items-center'>
-                                <div className='flex items-center'>
-                                    <img className='w-[50px] h-[50px] rounded-[50%]' src={userOnline.avatar} alt="" />
-                                    <div>
-                                        <p className='font-bold'>aaaa<span className='text-[14px] font-normal'> linh tinh</span></p>
-                                        <div className='flex gap-[20px] text-gray-500 text-[12px]'>
-                                            <div>20 h</div>
-                                            <div>Trả lời</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <i className='bx bx-heart' ></i>
-                            </div>
-                                        </div>
-                                    </div>
-                               </div>
-                            
-                        </div>         
-                     <div className='flex justify-between items-center'>
-                        <div className='flex items-center'>
-                            <img className='w-[50px] h-[50px] rounded-[50%]' src='https://cellphones.com.vn/sforum/wp-content/uploads/2024/02/anh-avatar-cute-1.jpg' alt="" />
-                            <div>
-                                <p className='font-bold'>hihii</p>
-                                <div className='flex gap-[20px] text-gray-500 text-[12px]'>
-                                    <div>2 tuần</div>
-                                    <div>Trả lời</div>
-                                </div>
-                            </div>
-                        </div>
-                        <i className='bx bx-heart' ></i>
-                    </div>
+                    
                  </div>
                 {/* All Comment end */}
                 <hr />
@@ -204,10 +234,10 @@ export default function ModalAllComment() {
                 <div className='text-gray-500 text-[14px]'>{post.fullDate}</div>
                 
                 {/* Comment */}
-                <div className='flex items-center justify-between'>
-                    <textarea onChange={handleChangeComment} className=' resize-none text-[14px] placeholder:italic placeholder:text-slate-400 block w-full border border-slate-300 rounded-md py-2 pl-9 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm w-[85%] max-h-[100px]' placeholder='Thêm bình luận' />
+                <form className='flex items-center justify-between gap-[10px]'>
+                    <textarea onChange={handleChangeComment} value={valueComment} className=' resize-none text-[14px] placeholder:italic placeholder:text-slate-400 block w-full border border-slate-300 rounded-md py-2 pl-9 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm w-[80%] max-h-[100px]' placeholder='Thêm bình luận' />
                     <button onClick={postComment} className='bg-[rgb(79,70,229)] text-white p-[5px] rounded-[5px] text-[14px] hover:bg-purple-500'>Đăng</button>
-                </div>
+                </form>
             </div>
         </div>      
     </div>

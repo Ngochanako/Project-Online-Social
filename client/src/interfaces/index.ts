@@ -6,7 +6,7 @@ export type CommentParent={
     postId:string,
     detail:string,
     date:number,
-    comments:CommentChild[]
+    commentsById:string[]
 }
 export type CommentChild={
     id:string,
@@ -22,11 +22,13 @@ export type CommentChild={
 export type Post={
     id:string,
     idUser:string,
+    avatarUser:string,
+    userNameUser:string,
     detail:string,
     date:number,
     fullDate:string,
     images:string[],
-    comments:CommentParent[],
+    commentsById:string[],
     favouristUsersById:string[],   
 }
 export type User={
@@ -37,7 +39,7 @@ export type User={
     avatar:string,
     biography:string,
     gender:string,
-    posts:Post[],
+    postsById:string[],
     followersById:string[],
     followUsersById:string[],
     status:boolean;
@@ -57,4 +59,7 @@ export type State={
     previewImages:string[],
     imagesPost:any[],
     post:Post,
+    posts:Post[],
+    commentsChild:CommentChild[],
+    commentsParent:CommentParent[]
 }

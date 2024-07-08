@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { Post, User } from "../../interfaces";
 import { getUserLogin, resetUserLogin, setUserLogin } from "../../services/userLogin.service";
-import { updateUser } from "../../services/user.service";
+import { updateUser } from "../../services/users.service";
 import axios from "axios";
 let initialUserLogin:User={
     id:'',
@@ -11,7 +11,7 @@ let initialUserLogin:User={
     avatar:'',
     biography:'',
     gender:'',
-    posts:[],
+    postsById:[],
     followersById:[],
     followUsersById:[],
     status:true,
@@ -28,9 +28,8 @@ const UserLoginReducer=createSlice({
     },
     extraReducers(builder) {
         builder
-        .addCase(getUserLogin.fulfilled,(state,action)=>{
-           let newPosts:Post[]=[...action.payload.posts];             
-            return {...action.payload,posts:newPosts.sort((a:Post,b:Post)=>b.date-a.date)};
+        .addCase(getUserLogin.fulfilled,(state,action)=>{            
+            return action.payload;
         })
         .addCase(setUserLogin.fulfilled,(state,action)=>{
             return action.payload;           

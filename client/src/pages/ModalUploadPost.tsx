@@ -10,7 +10,7 @@ import axios from 'axios';
 import { ref,uploadBytes,getDownloadURL } from 'firebase/storage';
 import { storage } from '../config/firebase';
 import { v4 as uuidv4 } from 'uuid';
-import { updateUser } from '../services/user.service';
+import { updateUser } from '../services/users.service';
 import { addNewPost } from '../services/posts.service';
 export default function ModalUploadPost() {
     const userOnline:User=useSelector((state:State)=>state.userLogin)
@@ -53,14 +53,16 @@ export default function ModalUploadPost() {
               let newPost:Post={
                 id:uuidv4(),
                 idUser:userOnline.id,
+                avatarUser:userOnline.avatar,
+                userNameUser:userOnline.username,
                 detail:contentPost,
                 date:new Date().getTime(),
                 fullDate:new Date().toISOString().split('T')[0],
                 images:newImgs,
-                comments:[],
+                commentsById:[],
                 favouristUsersById:[], 
                }             
-               let editUser:User={...userOnline,posts:[...userOnline.posts,newPost]};      
+               let editUser:User={...userOnline,postsById:[...userOnline.postsById,newPost.id]};      
                dispatch(setUserLogin(editUser));
                dispatch(updateUser(editUser));
                dispatch(addNewPost(newPost));
