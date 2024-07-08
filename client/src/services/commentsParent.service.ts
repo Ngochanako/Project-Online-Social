@@ -19,8 +19,6 @@ export const getCommentsParent:any=createAsyncThunk(
 export const updateCommentsParent:any=createAsyncThunk(
     "comments/updateCommentsParent",
     async(comment:CommentParent)=>{
-        console.log(333);
-        
         const response=await axios.put(`http://localhost:3000/commentsParent/${comment.id}`,comment);
         return response.data;
     }

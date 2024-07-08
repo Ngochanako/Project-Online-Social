@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { getUserLogin, setUserLogin} from '../services/userLogin.service';
 import axios from 'axios';
 import { activeModalAllComment, activeModalAvatar, activeModalPost } from '../store/reducers/ModalReducer';
-import ModalAvatar from './ModalAvatar';
+import ModalAvatar from '../components/ModalAvatar';
 import { Post } from '../interfaces';
 import { setPost } from '../store/reducers/PostReducer';
 import { getPosts } from '../services/posts.service';
@@ -50,7 +50,7 @@ export default function PersonalPage() {
          }
       }  
       setPostsByUserOnline(newPosts)   ;   
-    },[posts]) 
+    },[posts,userOnline]) 
       
      
         

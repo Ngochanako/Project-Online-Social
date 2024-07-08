@@ -49,6 +49,7 @@ export type Modal={
     avatar:boolean,
     post:boolean,
     uploadPost:boolean,
+    updatePost:boolean,
 }
 export type State={
     users:User[],

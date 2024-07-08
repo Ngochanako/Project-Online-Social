@@ -6,6 +6,7 @@ const initialModal:Modal={
     avatar:false,
     post:false,
     uploadPost:false,
+    updatePost:false,
 };
 const modalReducer=createSlice({
     name:"modal",
@@ -34,8 +35,14 @@ const modalReducer=createSlice({
         },
         disableModalUploadPost:(state)=>{
             state.uploadPost=false;
+        },
+        activeModalUpdatePost:(state)=>{
+            state.updatePost=true;
+        },
+        disableModalUpdatePost:(state)=>{
+            state.updatePost=false;
         }
     }
 })
-export const{activeModalAllComment,disableModalAllComment,activeModalAvatar,disableModalAvatar,activeModalPost,disableModalPost,activeModalUploadPost,disableModalUploadPost}=modalReducer.actions;
+export const{activeModalAllComment,disableModalAllComment,activeModalAvatar,disableModalAvatar,activeModalPost,disableModalPost,activeModalUploadPost,disableModalUploadPost,activeModalUpdatePost,disableModalUpdatePost}=modalReducer.actions;
 export default modalReducer.reducer;

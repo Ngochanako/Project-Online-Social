@@ -4,7 +4,7 @@ import Home from './pages/Home'
 import Register from './pages/Register'
 import Login from './pages/Login'
 import { Route, Routes } from 'react-router-dom'
-import Instagram from './pages/Instagram'
+import Instagram from './components/Instagram'
 import PersonalPage from './pages/PersonalPage'
 
 export default function App() {

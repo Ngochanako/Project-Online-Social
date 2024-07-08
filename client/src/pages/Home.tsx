@@ -3,11 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { resetUserLogin } from '../services/userLogin.service';
 import { NavLink } from "react-router-dom";
-import ModalCreatePost from "./ModalCreatePost";
+import ModalCreatePost from "../components/ModalCreatePost";
 import { State } from "../interfaces";
 import { activeModalPost } from "../store/reducers/ModalReducer";
-import ModalUploadPost from "./ModalUploadPost";
-import ModalAllComment from "./ModalAllComment";
+import ModalUploadPost from "../components/ModalUploadPost";
+import ModalAllComment from "../components/ModalAllComment";
+import ModalUpdatePost from "../components/ModalUpdatePost";
 export default function Home() {
     //Initialization
     const modalAllComment=useSelector((state:State)=>state.modal.comments);
@@ -15,7 +16,8 @@ export default function Home() {
     const navigate=useNavigate();
     const dispatch=useDispatch();
     const modalPost=useSelector((state:State)=>state.modal.post);
-    const modalUploadPost=useSelector((state:State)=>state.modal.uploadPost)
+    const modalUploadPost=useSelector((state:State)=>state.modal.uploadPost);
+    const modalUpdatePost=useSelector((state:State)=>state.modal.updatePost)
   //click viewmore
   const handleClickViewMore=(e:React.MouseEvent<HTMLDivElement>)=>{
     setViewmore(!viewmore);
@@ -53,6 +55,7 @@ export default function Home() {
        {modalAllComment &&<ModalAllComment/>}
         {modalPost && <ModalCreatePost/>}
         {modalUploadPost && <ModalUploadPost/>}
+        {modalUpdatePost&&<ModalUpdatePost/>}
         {/* Header left start */}
       <header className='header-left p-[30px]'>
         <div className='header-list-item mb-[30px]'>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Carousel from 'react-bootstrap/Carousel';
 import { useDispatch, useSelector } from 'react-redux';
-import { disableModalAllComment } from '../store/reducers/ModalReducer';
+import { activeModalUpdatePost, disableModalAllComment } from '../store/reducers/ModalReducer';
 import { CommentChild, CommentParent, Post, State } from '../interfaces';
 import axios from 'axios';
 import { setPost } from '../store/reducers/PostReducer';
@@ -17,7 +17,7 @@ export default function ModalAllComment() {
     const dispatch=useDispatch();
     const post:Post=useSelector((state:State)=>state.post);
     const [user,setUser]=useState<any>({});
-    const [visibleComments,setVisibleComment]=useState<{idComment:string,visible:number}>({idComment:'',visible:1});
+    const [visibleComments,setVisibleComment]=useState<any>({});
     const [idCommentViewMore,setIdCommentViewMore]=useState<string>('');
     const [valueComment, setValueComment]=useState<string>('');
     const [typeCommentPost,setTypeCommentPost]=useState<{type:string,id:string,userName:string}>({type:'',id:'',userName:''});
@@ -61,9 +61,12 @@ export default function ModalAllComment() {
         
     }
     //view more Comment
-    const viewMoreComment=(idComment:string)=>{
+    const viewMoreComment=(idComment:string,lengthComments:number)=>{
           setIdCommentViewMore(idComment);
-         setVisibleComment((prev)=>prev.idComment===idComment?{...prev,visible:prev.visible+1}:prev);
+         setVisibleComment((prev:any)=>({
+            ...prev,
+            [idComment]:prev[idComment]==lengthComments?0:(prev[idComment]||0)+1
+         }));
     }
     // like or unlike Post
     const favouristPost=()=>{
@@ -142,7 +145,12 @@ export default function ModalAllComment() {
         setTypeCommentPost({type:'replyParent',id:idComment,userName:usernameParent});
         setValueComment(`@${usernameParent} `);
     }
-    
+    //open Modal Update Post
+    const openModalUpdatePost=()=>{
+        console.log(1);
+        
+        dispatch(activeModalUpdatePost())
+    }
   return (
     <div className='modal'>
         <div onClick={closeModal} className='modal-close'></div>
@@ -162,10 +170,18 @@ export default function ModalAllComment() {
            </Carousel>
            
             <div className='flex flex-col gap-[10px] p-[10px] w-[420px]'>
-                <div className='flex items-center'>
-                        <img className='w-[50px] h-[50px] rounded-[50%]' src={user.avatar} alt="" />
-                        <div className='font-bold'>{user.username} {!userOnline.followUsersById.includes(user.id)?(<span onClick={followUser} className='text-[rgb(79,70,229)] font-bold'>Theo dõi</span>):('')}</div>
+                <div className='flex justify-between'>
+                    <div className='flex items-center'>
+                            <img className='w-[50px] h-[50px] rounded-[50%]' src={user.avatar} alt="" />
+                            <div className='font-bold'>{user.username} {!userOnline.followUsersById.includes(user.id)?(<span onClick={followUser} className='text-[rgb(79,70,229)] font-bold'>Theo dõi</span>):('')}</div>
+                    </div>
+                    <div onClick={openModalUpdatePost} className='flex items-center gap-[5px] cursor-pointer hover:text-gray-400'>
+                        <div className='w-[3px] h-[3px] bg-gray-600 rounded-[50%]'></div>
+                        <div className='w-[3px] h-[3px] bg-gray-600 rounded-[50%]'></div>
+                        <div className='w-[3px] h-[3px] bg-gray-600 rounded-[50%]'></div>
+                    </div>
                 </div>
+                
                 <hr />
                  {/* All comment start */}
                  <div className='all-comment flex flex-col gap-[15px] overflow-auto max-h-[250px]'> 
@@ -190,7 +206,7 @@ export default function ModalAllComment() {
                                    <div>------------</div>
                                    <div>                                     
                                         <div className={idCommentViewMore===btn.id?'flex flex-col gap-[10px]':'hidden flex flex-col gap-[10px]'}>
-                                            {commentsChildUser(btn.commentsById).slice(0,visibleComments.visible).map(item=>(
+                                            {commentsChildUser(btn.commentsById).slice(0,visibleComments[btn.id]).map(item=>(
                                             <div className='flex justify-between items-center' key={item.id}>
                                                 <div className='flex items-center'>
                                                     <img className='w-[50px] h-[50px] rounded-[50%]' src={item.avatarUser} alt="" />
@@ -207,7 +223,7 @@ export default function ModalAllComment() {
                                             ))}
                                             
                                         </div>
-                                        <div className='hover:text-gray-800 cursor-pointer' onClick={()=>viewMoreComment(btn.id)}>Xem thêm bình luận ({btn.commentsById.length})</div>
+                                        <div className='hover:text-gray-800 cursor-pointer' onClick={()=>viewMoreComment(btn.id,btn.commentsById.length)}>{visibleComments[btn.id]!==btn.commentsById.length?'Xem thêm bình luận':'Ẩn tất cả bình luận'}{visibleComments[btn.id]!==btn.commentsById.length?`(${btn.commentsById.length-(visibleComments[btn.id]||0)})`:''}</div>
                                     </div>
                                   
                                </div>):('')

@@ -59,12 +59,18 @@
       "username": "maimai",
       "password": "Abc123",
       "email": "mai@gmail.com",
-      "avatar": "https://cellphones.com.vn/sforum/wp-content/uploads/2023/10/avatar-trang-4.jpg",
+      "avatar": "https://firebasestorage.googleapis.com/v0/b/online-social-2adfa.appspot.com/o/imagesPost%2F3.jpg?alt=media&token=81a3b896-b350-46d9-a05c-fde4979f949d",
       "biography": "",
       "gender": "",
-      "postsById": [],
+      "postsById": [
+        "5513e12b-70f9-42ee-9610-1ce6ce190d66",
+        "2e678c75-d87d-4e5b-9a7d-d0919156eef0"
+      ],
       "followersById": [],
-      "followUsersById": [],
+      "followUsersById": [
+        "17630eb4-0bc0-445e-a403-6701c9a1fd59",
+        "a1b0fa13-a9e1-4ba2-a756-9f32012aadae"
+      ],
       "status": true
     }
   ],
@@ -120,22 +126,49 @@
       "favouristUsersById": [
         "ac0747ed-8ca2-490e-8933-1778d43a930d"
       ]
+    },
+    {
+      "id": "5513e12b-70f9-42ee-9610-1ce6ce190d66",
+      "idUser": "ac0747ed-8ca2-490e-8933-1778d43a930d",
+      "avatarUser": "https://firebasestorage.googleapis.com/v0/b/online-social-2adfa.appspot.com/o/imagesPost%2F3.jpg?alt=media&token=81a3b896-b350-46d9-a05c-fde4979f949d",
+      "userNameUser": "maimai",
+      "detail": "Beautiful!!!!!!",
+      "date": 1720418442487,
+      "fullDate": "2024-07-08",
+      "images": [
+        "https://firebasestorage.googleapis.com/v0/b/online-social-2adfa.appspot.com/o/imagesPost%2F1.jpg?alt=media&token=36eda21b-2e07-44c6-86b6-5be9172a4177",
+        "https://firebasestorage.googleapis.com/v0/b/online-social-2adfa.appspot.com/o/imagesPost%2F4.jpg?alt=media&token=1541f3e2-6c12-4539-8e61-cb2170a03fdd",
+        "https://firebasestorage.googleapis.com/v0/b/online-social-2adfa.appspot.com/o/imagesPost%2F3.jpg?alt=media&token=9c86bfa4-56d4-4b05-a5e0-7d00068f81dd"
+      ],
+      "commentsById": [],
+      "favouristUsersById": []
+    },
+    {
+      "id": "2e678c75-d87d-4e5b-9a7d-d0919156eef0",
+      "idUser": "ac0747ed-8ca2-490e-8933-1778d43a930d",
+      "avatarUser": "https://firebasestorage.googleapis.com/v0/b/online-social-2adfa.appspot.com/o/imagesPost%2F3.jpg?alt=media&token=81a3b896-b350-46d9-a05c-fde4979f949d",
+      "userNameUser": "maimai",
+      "detail": "hoc",
+      "date": 1720418941788,
+      "fullDate": "2024-07-08",
+      "images": [
+        "https://firebasestorage.googleapis.com/v0/b/online-social-2adfa.appspot.com/o/imagesPost%2FNguy%E1%BB%85n%20Th%E1%BB%8B%20Ng%E1%BB%8Dc.jpg?alt=media&token=07d44116-3a19-4df0-879b-56166bdb11e4"
+      ],
+      "commentsById": [],
+      "favouristUsersById": []
     }
   ],
   "userLogin": {
-    "id": "ac0747ed-8ca2-490e-8933-1778d43a930d",
-    "username": "maimai",
-    "password": "Abc123",
-    "email": "mai@gmail.com",
-    "avatar": "https://cellphones.com.vn/sforum/wp-content/uploads/2023/10/avatar-trang-4.jpg",
+    "id": "",
+    "username": "",
+    "password": "",
+    "email": "",
+    "avatar": "",
     "biography": "",
     "gender": "",
-    "postsById": [],
+    "posts": [],
     "followersById": [],
-    "followUsersById": [
-      "17630eb4-0bc0-445e-a403-6701c9a1fd59",
-      "a1b0fa13-a9e1-4ba2-a756-9f32012aadae"
-    ],
+    "followUsersById": [],
     "status": true
   },
   "commentsParent": [
@@ -159,7 +192,8 @@
       "date": 1720348271319,
       "commentsById": [
         "47dac21c-05f5-4b98-926f-0c96395f0249",
-        "89b80e48-ea97-44d4-b96e-132230906424"
+        "89b80e48-ea97-44d4-b96e-132230906424",
+        "531f5017-f3ee-461f-85ee-500e8f20958e"
       ]
     },
     {
@@ -205,6 +239,17 @@
       "userNameParent": "maimai",
       "detail": "@maimai hay",
       "date": 1720381300258
+    },
+    {
+      "id": "531f5017-f3ee-461f-85ee-500e8f20958e",
+      "idUser": "ac0747ed-8ca2-490e-8933-1778d43a930d",
+      "avatarUser": "https://cellphones.com.vn/sforum/wp-content/uploads/2023/10/avatar-trang-4.jpg",
+      "userNameUser": "maimai",
+      "postId": "7dab3795-7d45-41fe-9e6b-f564b6363aa2",
+      "idParent": "6f5165fa-4994-4ef7-b67a-60c04e82d6c8",
+      "userNameParent": "maimai",
+      "detail": "@maimai thanks",
+      "date": 1720414099756
     }
   ]
 }

@@ -158,7 +158,7 @@ export default function Register() {
                  <p className='text-register'>By signing up, you agree to our Terms , Privacy Policy and Cookies Policy .</p>
                  <Button onClick={register} className='bg-[rgb(0,149,246)] border-transparent' variant="primary">Sign up </Button>
         </form>
-        <p className='text-gray-700 font-[500] text-center'>Have an account? <span><a className='text-blue-500' href="">Login</a></span></p>
+        <p className='text-gray-700 font-[500] text-center'>Have an account? <span><a className='text-blue-500' href="/login">Login</a></span></p>
       </div>
     </div>
   )
