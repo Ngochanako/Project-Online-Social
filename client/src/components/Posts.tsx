@@ -80,7 +80,7 @@ export default function Posts() {
          return total;
      }
   return (
-    <div className='w-[100%]'>
+    <div className='w-[70%]'>
       {/* Modal All Comment Start */}
      
       {/* Reel start */}
@@ -88,7 +88,7 @@ export default function Posts() {
       {/* Posts start */}
       <main className='px-[100px] py-[50px]'>
           <div className=''>
-            <hr />
+            <div className='w-[100%]' style={{border:"1px solid rgb(239,239,239)"}}></div>
             {posts.map(btn=>(
               <div key={btn.id}>
                   {/* Title start */}

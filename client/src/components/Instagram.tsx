@@ -59,12 +59,12 @@ export default function Instagram() {
         }      
     }
   return (
-    <div className='flex w-[100%]'>
+    <div className='flex ml-[230px]'>
           {/* Posts start */}
       <Posts/>
       {/* Posts end */}
       {/* User start */}
-      <section className='p-[20px] w-[50%] font-bold'>
+      <section className='p-[20px] w-[30%] font-bold'>
          <div className='flex flex-col gap-[20px] '>
           <div className='flex justify-between'>
                

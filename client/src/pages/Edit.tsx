@@ -52,7 +52,7 @@ export default function Edit() {
         dispatch(updateUser(user));
     }
   return (
-    <div className='py-[50px] flex flex-col gap-[50px] px-[100px]'>
+    <div className='py-[50px] flex flex-col gap-[50px] px-[100px] ml-[230px]'>
       <header className='flex items-center justify-between py-[20px] px-[50px] bg-[rgb(239,239,239)] rounded-[20px]'>
         <div className='flex items-center gap-[10px]'>
              <img className='w-[80px] h-[80px] rounded-[50%]' src={userOnline.avatar} alt="" /> 

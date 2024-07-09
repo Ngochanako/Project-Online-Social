@@ -15,7 +15,6 @@ export default function User() {
     const navigate=useNavigate();
     const userOnline=useSelector((state:State)=>state.userLogin);
     const test=useSelector((state:State)=>state);
-console.log(test);
 
     const users=useSelector((state:State)=>state.users);
     const posts=useSelector((state:State)=>state.posts);
@@ -87,7 +86,7 @@ console.log(test);
     }
   }
   return (
-    <div className='p-[50px]'>
+    <div className='p-[50px] ml-[230px]'>
       
         <header className='px-[40px] flex gap-[80px] items-center'>
             <img className='cursor-pointer w-[150px] h-[150px] rounded-[50%]' src={user.avatar} alt="" />

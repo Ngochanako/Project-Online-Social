@@ -66,7 +66,7 @@ export default function PersonalPage() {
     }
   return (
 
-    <div className='p-[50px]'>
+    <div className='p-[50px] ml-[230px]'>
       
         <header className='px-[40px] flex gap-[80px] items-center'>
             <img onClick={openModalAvatar} className='cursor-pointer w-[150px] h-[150px] rounded-[50%]' src={userOnline.avatar} alt="" />
@@ -88,7 +88,7 @@ export default function PersonalPage() {
             <i className='bx bx-plus bx-border-circle text-[55px] bg-[rgb(250,250,250)] text-[rgb(199,199,199)] border-1'></i>
             <p className='text-[14px] ml-[25px] font-bold'>Mới</p>
         </div>
-        <hr className='' />
+        <div className='w-[100%]' style={{border:"1px solid rgb(239,239,239)"}}></div>
         <div className='my-[20px] flex justify-center gap-[50px]'>
             <div className='flex items-center gap-[10px]  text-black cursor-pointer'>
             <i className='bx bx-menu bx-border'></i>
