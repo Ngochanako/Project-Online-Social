@@ -18,6 +18,7 @@ const registerReducer=createSlice({
             state.push(action.payload);
         })
         .addCase(updateUser.fulfilled,(state,action)=>{
+            console.log(111,action.payload);
             return state.map(item=>item.id===action.payload.id?action.payload:item)
         })
     }

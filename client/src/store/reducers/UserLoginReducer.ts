@@ -13,7 +13,6 @@ let initialUserLogin:User={
     gender:'',
     postsById:[],
     followersById:[],
-    followUsersById:[],
     status:true,
     private:false,
 }
@@ -36,9 +35,6 @@ const UserLoginReducer=createSlice({
             return action.payload;           
         })
         .addCase(resetUserLogin.fulfilled,(state,action)=>{
-            return action.payload;
-        })
-        .addCase(updateUser.fulfilled,(state,action)=>{
             return action.payload;
         })
     },

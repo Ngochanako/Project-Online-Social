@@ -57,7 +57,7 @@ export default function Home() {
     dispatch(activeModalPost());
   }
   return (
-    <div className=''>
+    <div className='flex'>
        {modalAllComment &&<ModalAllComment/>}
         {modalPost && <ModalCreatePost/>}
         {modalUploadPost && <ModalUploadPost/>}
@@ -66,7 +66,8 @@ export default function Home() {
         {modalEditPost&&<ModalEditPost/>}
         {modalAvatar&&<ModalAvatar/>}
         {/* Header left start */}
-      <header className='header-left p-[30px]'>
+      <header className='header-left  p-[30px] '>
+        <div className="fixed">
         <div className='header-list-item mb-[30px]'>
           <i className="fa-brands fa-instagram text-[20px]"></i>
           <div className='text-[20px] font-[600]'>INSTAGRAM</div>
@@ -124,7 +125,12 @@ export default function Home() {
           </div>}
         </div>
         </div>
+        </div>
+        <div className="p-[50px]">
+          <div className="text-black">kkkkkkk</div>
+        </div>
       </header>
+     
       {/* Header-left end */}
       <Outlet/>
     </div>

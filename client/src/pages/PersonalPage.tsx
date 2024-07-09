@@ -66,7 +66,7 @@ export default function PersonalPage() {
     }
   return (
 
-    <div className='p-[50px] ml-[260px]'>
+    <div className='p-[50px]'>
       
         <header className='px-[40px] flex gap-[80px] items-center'>
             <img onClick={openModalAvatar} className='cursor-pointer w-[150px] h-[150px] rounded-[50%]' src={userOnline.avatar} alt="" />

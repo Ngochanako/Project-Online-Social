@@ -37,7 +37,9 @@
       "biography": "",
       "gender": "",
       "postsById": [],
-      "followersById": [],
+      "followersById": [
+        "4f5f04f5-fa61-46b9-8287-00555b09b018"
+      ],
       "status": true
     },
     {
@@ -52,10 +54,7 @@
         "5513e12b-70f9-42ee-9610-1ce6ce190d66",
         "2e678c75-d87d-4e5b-9a7d-d0919156eef0"
       ],
-      "followersById": [
-        "4f5f04f5-fa61-46b9-8287-00555b09b018",
-        "ac0747ed-8ca2-490e-8933-1778d43a930d"
-      ],
+      "followersById": [],
       "status": true,
       "private": true
     }

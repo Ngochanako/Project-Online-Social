@@ -80,7 +80,7 @@ export default function Posts() {
          return total;
      }
   return (
-    <div className='w-[70%]'>
+    <div className='w-[100%]'>
       {/* Modal All Comment Start */}
      
       {/* Reel start */}
