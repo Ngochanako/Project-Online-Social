@@ -10,6 +10,7 @@ import { addNewCommentParent, getCommentsParent, updateCommentsParent } from '..
 import { addNewCommentChild, getCommentsChild } from '../services/commentsChild.service';
 import { getPosts, updatePosts } from '../services/posts.service';
 import { convertTime } from '../interfaces/convertTime';
+import { Link } from 'react-router-dom';
 export default function ModalAllComment() {
     const commentsChild=useSelector((state:State)=>state.commentsChild);
     const commentsParent=useSelector((state:State)=>state.commentsParent);
@@ -147,8 +148,6 @@ export default function ModalAllComment() {
     }
     //open Modal Update Post
     const openModalUpdatePost=()=>{
-        console.log(1);
-        
         dispatch(activeModalUpdatePost())
     }
   return (
@@ -173,7 +172,7 @@ export default function ModalAllComment() {
                 <div className='flex justify-between'>
                     <div className='flex items-center'>
                             <img className='w-[50px] h-[50px] rounded-[50%]' src={user.avatar} alt="" />
-                            <div className='font-bold'>{user.username} {!userOnline.followUsersById.includes(user.id)?(<span onClick={followUser} className='text-[rgb(79,70,229)] font-bold'>Theo dõi</span>):('')}</div>
+                            <div className='font-bold'><Link to={`/user/${user.id}`}>{user.username}</Link> {!userOnline.followUsersById.includes(user.id)?(<span onClick={followUser} className='text-[rgb(79,70,229)] font-bold'> Theo dõi</span>):('')}</div>
                     </div>
                     <div onClick={openModalUpdatePost} className='flex items-center gap-[5px] cursor-pointer hover:text-gray-400'>
                         <div className='w-[3px] h-[3px] bg-gray-600 rounded-[50%]'></div>
@@ -184,7 +183,15 @@ export default function ModalAllComment() {
                 
                 <hr />
                  {/* All comment start */}
-                 <div className='all-comment flex flex-col gap-[15px] overflow-auto max-h-[250px]'> 
+                 <div className='all-comment flex flex-col gap-[15px] overflow-auto max-h-[250px]'>
+                 <div className='flex items-center'>
+                            <img className='w-[50px] h-[50px] rounded-[50%]' src={user.avatar} alt="" />
+                            <div>
+                                <div className='font-bold'><Link to={`/user/${user.id}`}>{user.username}</Link> <span className='font-normal text-[14px]'>{post.detail}</span></div>
+                                <div className='text-[14px] text-gray-500'>{convertTime((new Date().getTime()-post.date)/60000)}</div>
+                            </div>
+                            
+                    </div>
                     {commentsParentUser.length===0&&<div className='text-orange-400 font-bold text-[14px] text-center text-opacity-90 italic'>Chưa có bình luận nào cho bài viết này !</div>}
                     {commentsParentUser.map(btn=>(
                         <div key={btn.id} className='flex flex-col'>
@@ -192,7 +199,7 @@ export default function ModalAllComment() {
                                 <div className='flex items-center'>
                                     <img className='w-[50px] h-[50px] rounded-[50%]' src={btn.avatarUser} alt="" />
                                     <div>
-                                        <p className='text-[14px] font-bold'>{btn.userNameUser}<span className='text-[14px] font-normal'> {btn.detail}</span> </p>
+                                        <p className='text-[14px] font-bold'><Link to={`/user/${btn.idUser}`}>{btn.userNameUser}</Link><span className='text-[14px] font-normal'> {btn.detail}</span> </p>
                                         <div className='flex gap-[20px] text-gray-500 text-[12px]'>
                                             <div>{convertTime((new Date().getTime()-btn.date)/60000)}</div>
                                             <div onClick={()=>replyComment(btn.id,btn.userNameUser)} className='hover:text-gray-800 cursor-pointer'>Trả lời</div>
@@ -211,7 +218,7 @@ export default function ModalAllComment() {
                                                 <div className='flex items-center'>
                                                     <img className='w-[50px] h-[50px] rounded-[50%]' src={item.avatarUser} alt="" />
                                                     <div>
-                                                        <p> {item.detail}</p>
+                                                        <div className='flex gap-[5px] items-center'><Link className='text-black' to={`/user/${item.idUser}`}>{item.userNameUser}</Link> {item.detail}</div>
                                                         <div className='flex gap-[20px] text-gray-500 text-[12px]'>
                                                             <div>{convertTime((new Date().getTime()-item.date)/60000)}</div>
                                                             <div onClick={()=>replyComment(btn.id,item.userNameUser)}  className='hover:text-gray-800 cursor-pointer'>Trả lời</div>
@@ -250,9 +257,11 @@ export default function ModalAllComment() {
                 <div className='text-gray-500 text-[14px]'>{post.fullDate}</div>
                 
                 {/* Comment */}
-                <form className='flex items-center justify-between gap-[10px]'>
+                <form className=''>
+                    <div className='flex items-center justify-between gap-[10px]'>
                     <textarea onChange={handleChangeComment} value={valueComment} className=' resize-none text-[14px] placeholder:italic placeholder:text-slate-400 block w-full border border-slate-300 rounded-md py-2 pl-9 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm w-[80%] max-h-[100px]' placeholder='Thêm bình luận' />
                     <button onClick={postComment} className='bg-[rgb(79,70,229)] text-white p-[5px] rounded-[5px] text-[14px] hover:bg-purple-500'>Đăng</button>
+                    </div>             
                 </form>
             </div>
         </div>      

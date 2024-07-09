@@ -15,6 +15,7 @@ let initialUserLogin:User={
     followersById:[],
     followUsersById:[],
     status:true,
+    private:false,
 }
 axios.get("http://localhost:3000/userLogin")
 .then(response=>{

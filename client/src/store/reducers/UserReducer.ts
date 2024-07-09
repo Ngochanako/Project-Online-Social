@@ -11,8 +11,8 @@ const initialUser:User={
     gender:'',
     postsById:[],
     followersById:[],
-    followUsersById:[],
     status:true,
+    private:false,
 }
 const userReducer=createSlice({
     name:'user',

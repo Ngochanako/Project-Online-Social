@@ -13,7 +13,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { updateUser } from '../services/users.service';
 import { addNewPost } from '../services/posts.service';
 export default function ModalUploadPost() {
-    const userOnline:User=useSelector((state:State)=>state.userLogin)
+    const userOnline:User=useSelector((state:State)=>state.userLogin);
     const navigate=useNavigate();
     const dispatch=useDispatch();
     const previewImages=useSelector((state:State)=>state.previewImages)
@@ -21,8 +21,6 @@ export default function ModalUploadPost() {
     const [contentPost,setContentPost]=useState<string>('');
     //load Page when user is not login or login
     useEffect(()=>{
-        console.log(previewImages);
-        
        dispatch(getUserLogin())
        axios.get("http://localhost:3000/userLogin")
        .then(response=>{

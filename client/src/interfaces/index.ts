@@ -41,8 +41,8 @@ export type User={
     gender:string,
     postsById:string[],
     followersById:string[],
-    followUsersById:string[],
-    status:boolean;
+    status:boolean,
+    private:boolean
 }
 export type Modal={
     comments:boolean,
@@ -50,6 +50,8 @@ export type Modal={
     post:boolean,
     uploadPost:boolean,
     updatePost:boolean,
+    delete:boolean,
+    editPost:boolean,
 }
 export type State={
     users:User[],

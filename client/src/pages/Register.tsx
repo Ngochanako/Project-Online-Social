@@ -32,8 +32,8 @@ export default function Register() {
     gender:'',
     postsById:[],
     followersById:[],
-    followUsersById:[],
     status:true,
+    private:false
   })
   //reset User
   const resetUser=()=>{
@@ -47,8 +47,8 @@ export default function Register() {
     gender:'',
     postsById:[],
     followersById:[],
-    followUsersById:[],
     status:true,
+    private:false,
     })
   }
   //Validate Email

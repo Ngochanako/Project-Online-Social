@@ -18,7 +18,7 @@ export const getUsers:any=createAsyncThunk(
     }
 )
 export const updateUser:any=createAsyncThunk(
-    "users/updateAvatar",
+    "users/updateUser",
     async(user:User)=>{
         const response=await axios.put(`http://localhost:3000/users/${user.id}`,user);
         return response.data;
@@ -27,8 +27,7 @@ export const updateUser:any=createAsyncThunk(
 export const updateFollowersUser:any=createAsyncThunk(
     "users/updateFollowers",
     async(user:User)=>{
-        const response=await axios.put(`http://localhost:3000/users/${user.id}`,user);
-        
+        const response=await axios.put(`http://localhost:3000/users/${user.id}`,user);      
         return response.data;
     }
 )

@@ -9,6 +9,9 @@ import { activeModalPost } from "../store/reducers/ModalReducer";
 import ModalUploadPost from "../components/ModalUploadPost";
 import ModalAllComment from "../components/ModalAllComment";
 import ModalUpdatePost from "../components/ModalUpdatePost";
+import ModalDelete from "../components/ModalDelete";
+import ModalEditPost from "../components/ModalEditPost";
+import ModalAvatar from "../components/ModalAvatar";
 export default function Home() {
     //Initialization
     const modalAllComment=useSelector((state:State)=>state.modal.comments);
@@ -17,14 +20,17 @@ export default function Home() {
     const dispatch=useDispatch();
     const modalPost=useSelector((state:State)=>state.modal.post);
     const modalUploadPost=useSelector((state:State)=>state.modal.uploadPost);
-    const modalUpdatePost=useSelector((state:State)=>state.modal.updatePost)
+    const modalUpdatePost=useSelector((state:State)=>state.modal.updatePost);
+    const modalDelete=useSelector((state:State)=>state.modal.delete);
+    const modalEditPost=useSelector((state:State)=>state.modal.editPost);
+    const modalAvatar=useSelector((state:State)=>state.modal.avatar);
   //click viewmore
   const handleClickViewMore=(e:React.MouseEvent<HTMLDivElement>)=>{
     setViewmore(!viewmore);
   }
   //logout
   const logout=(event:React.MouseEvent<HTMLDivElement>)=>{ 
-    navigate('/login');       
+    navigate('/preLogin');       
      dispatch(resetUserLogin({
       id:'',
   username:'',
@@ -56,6 +62,9 @@ export default function Home() {
         {modalPost && <ModalCreatePost/>}
         {modalUploadPost && <ModalUploadPost/>}
         {modalUpdatePost&&<ModalUpdatePost/>}
+        {modalDelete&&<ModalDelete/>}
+        {modalEditPost&&<ModalEditPost/>}
+        {modalAvatar&&<ModalAvatar/>}
         {/* Header left start */}
       <header className='header-left p-[30px]'>
         <div className='header-list-item mb-[30px]'>
@@ -99,10 +108,10 @@ export default function Home() {
         <i className="fa-solid fa-bars text-[#565555] text-[22px] relative"></i>
           <div onClick={handleClickViewMore} className=''>Xem thêm</div>
           {/* section View More */}
-          {viewmore &&  <div className='flex flex-col p-[10px] bg-white absolute top-[380px] right-[20px] z-[1000] shadow-2xl rounded-lg'>
+          {viewmore &&  <div className='flex flex-col p-[10px] bg-white absolute top-[350px] right-[20px] z-[1000] shadow-2xl rounded-lg'>
               <div className='viewmore-item flex gap-[20px]'>
                 <i className="fa-solid fa-gear"></i>
-                <div>Cài đặt</div>
+                <NavLink style={active} to={'personal/edit'}> Chỉnh sửa trang cá nhân</NavLink>
               </div>
               <div className='viewmore-item flex gap-[20px]'>
                 <i className="fa-solid fa-chart-line"></i>

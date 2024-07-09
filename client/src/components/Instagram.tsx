@@ -2,8 +2,8 @@
 import React, { useEffect, useState } from 'react';
 import { State, User } from '../interfaces';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { getUserLogin, resetUserLogin, setUserLogin, updateFollowersUserLogin } from '../services/userLogin.service';
+import { Link, useNavigate } from 'react-router-dom';
+import {getUserLogin, setUserLogin, updateFollowersUserLogin } from '../services/userLogin.service';
 import Posts from './Posts';
 import axios from 'axios';
 import { getUsers, updateFollowersUser } from '../services/users.service';
@@ -23,55 +23,40 @@ export default function Instagram() {
       gender:'',
       postsById:[],
       followersById:[],
-      followUsersById:[],
       status:true,
+      private:false
     });
    // get Users from API
     useEffect(()=>{
-      dispatch(getUsers())
+      dispatch(getUsers());
+      axios.get("http://localhost:3000/userLogin")
+    .then(response=>{
+        if(response.data.id!==''){      
+        }else{
+            navigate('/preLogin')           
+        }
+        })
+    .catch(err=>console.log(err))
     },[])
     //get usersUnFollow
     useEffect(()=>{
-      const newUsers = users.filter(btn =>btn.id!==userOnline.id&& !userOnline.followUsersById.includes(btn.id));
-      
-      setUsersUnFollow(newUsers);
-      
-      
+      const newUsers = users.filter(btn =>!btn.followersById.includes(userOnline.id)&&btn.id!==userOnline.id);      
+      setUsersUnFollow(newUsers);     
     },[users,userOnline])
-    
-    
-    //load Page when user is not login or login
-    useEffect(()=>{
-       dispatch(getUserLogin())
-       axios.get("http://localhost:3000/userLogin")
-       .then(response=>{
-          if(response.data.id!==''){
-            setUser(response.data)
-          }else{
-            navigate('/login')           
-          }
-       })
-       .catch(err=>console.log(err))
-    },[])
     // follow User
     const followUser=(id:string)=>{
-        const newUser={
-         ...userOnline,
-         followersById:[...userOnline.followUsersById,id]
-        }
-        setUser(newUser)
-        dispatch(updateFollowersUser(newUser));
-        dispatch(updateFollowersUserLogin(newUser));
-        dispatch(setUserLogin(newUser));
-        const userFollowed=users.find(btn=>btn.id===id);
-        if(userFollowed){
-           const userFollowedNew={
-            ...userFollowed,
-            followersById:[...userFollowed.followersById,userOnline.id]
-           
+        //get User from users
+        const userFollow=users.find(btn=>btn.id===id);
+        if(userFollow){
+          const newUser={
+            ...userFollow,
+            followersById:[...userFollow.followersById,userOnline.id]
            }
-           dispatch(updateFollowersUser(userFollowedNew))
-        }
+           setUser(newUser);
+           dispatch(updateFollowersUser(newUser));
+            dispatch(updateFollowersUserLogin(newUser));
+            dispatch(setUserLogin(newUser));
+        }      
     }
   return (
     <div className='flex ml-[260px]'>
@@ -82,10 +67,12 @@ export default function Instagram() {
       <section className='p-[20px] w-[30%] font-bold'>
          <div className='flex flex-col gap-[20px] '>
           <div className='flex justify-between'>
-               <div className='flex items-center'>
-                   <img className='w-[50px] h-[50px] rounded-[50%]' src={userOnline.avatar} alt="" />
-                    <p className=''>{userOnline.username}</p>
-               </div>
+               
+                  <div className='flex items-center'>
+                      <img className='w-[50px] h-[50px] rounded-[50%]' src={userOnline.avatar} alt="" />
+                        <p className=''>{userOnline.username}</p>
+                  </div>
+                         
                <a className='text-orange-600 text-[14px]'>Chuyển</a>
           </div>
           <div className='flex justify-between'>
@@ -96,9 +83,9 @@ export default function Instagram() {
               {usersUnFolow.map(btn=>(
                  <div key={btn.id} className='flex justify-between items-center'>
                  <div className='flex items-center'>
-                     <img className='w-[50px] h-[50px] rounded-[50%]' src={btn.avatar} alt="" />
+                    <Link to={`/user/${btn.id}`}><img className='w-[50px] h-[50px] rounded-[50%]' src={btn.avatar} alt="" /></Link> 
                      <div>
-                        <p className=''>{btn.username}</p>
+                        <Link to={`/user/${btn.id}`}><p className=''>{btn.username}</p> </Link> 
                         <p className='text-gray-400 text-[14px] font-normal'> Gợi ý cho bạn</p>
                      </div>
                  </div>

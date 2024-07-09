@@ -19,8 +19,9 @@ const postReducer=createSlice({
     reducers:{
         setPost:(state,action)=>{
             return action.payload;
-        }
+        },
+        resetPost:state=>initialPost
     }
 })
-export const {setPost}=postReducer.actions;
+export const {setPost,resetPost}=postReducer.actions;
 export default postReducer.reducer;

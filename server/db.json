@@ -13,11 +13,7 @@
         "00c90e7a-fa4c-4494-9b1e-2a51bbebabc3",
         "7dab3795-7d45-41fe-9e6b-f564b6363aa2"
       ],
-      "followersById": [
-        "17630eb4-0bc0-445e-a403-6701c9a1fd59",
-        "a1b0fa13-a9e1-4ba2-a756-9f32012aadae"
-      ],
-      "followUsersById": [],
+      "followersById": [],
       "status": true
     },
     {
@@ -29,13 +25,7 @@
       "biography": "",
       "gender": "",
       "postsById": [],
-      "followersById": [
-        "4f5f04f5-fa61-46b9-8287-00555b09b018",
-        "17630eb4-0bc0-445e-a403-6701c9a1fd59"
-      ],
-      "followUsersById": [
-        "4f5f04f5-fa61-46b9-8287-00555b09b018"
-      ],
+      "followersById": [],
       "status": true
     },
     {
@@ -47,11 +37,7 @@
       "biography": "",
       "gender": "",
       "postsById": [],
-      "followersById": [
-        "4f5f04f5-fa61-46b9-8287-00555b09b018",
-        "a1b0fa13-a9e1-4ba2-a756-9f32012aadae"
-      ],
-      "followUsersById": [],
+      "followersById": [],
       "status": true
     },
     {
@@ -59,19 +45,19 @@
       "username": "maimai",
       "password": "Abc123",
       "email": "mai@gmail.com",
-      "avatar": "https://firebasestorage.googleapis.com/v0/b/online-social-2adfa.appspot.com/o/imagesPost%2F3.jpg?alt=media&token=81a3b896-b350-46d9-a05c-fde4979f949d",
-      "biography": "",
-      "gender": "",
+      "avatar": "https://firebasestorage.googleapis.com/v0/b/online-social-2adfa.appspot.com/o/imagesPost%2F4.jpg?alt=media&token=34f91fbe-27ea-49da-b1ab-129b2481da58",
+      "biography": "xin chào",
+      "gender": "Nữ",
       "postsById": [
         "5513e12b-70f9-42ee-9610-1ce6ce190d66",
         "2e678c75-d87d-4e5b-9a7d-d0919156eef0"
       ],
-      "followersById": [],
-      "followUsersById": [
-        "17630eb4-0bc0-445e-a403-6701c9a1fd59",
-        "a1b0fa13-a9e1-4ba2-a756-9f32012aadae"
+      "followersById": [
+        "4f5f04f5-fa61-46b9-8287-00555b09b018",
+        "ac0747ed-8ca2-490e-8933-1778d43a930d"
       ],
-      "status": true
+      "status": true,
+      "private": true
     }
   ],
   "posts": [
@@ -128,27 +114,11 @@
       ]
     },
     {
-      "id": "5513e12b-70f9-42ee-9610-1ce6ce190d66",
-      "idUser": "ac0747ed-8ca2-490e-8933-1778d43a930d",
-      "avatarUser": "https://firebasestorage.googleapis.com/v0/b/online-social-2adfa.appspot.com/o/imagesPost%2F3.jpg?alt=media&token=81a3b896-b350-46d9-a05c-fde4979f949d",
-      "userNameUser": "maimai",
-      "detail": "Beautiful!!!!!!",
-      "date": 1720418442487,
-      "fullDate": "2024-07-08",
-      "images": [
-        "https://firebasestorage.googleapis.com/v0/b/online-social-2adfa.appspot.com/o/imagesPost%2F1.jpg?alt=media&token=36eda21b-2e07-44c6-86b6-5be9172a4177",
-        "https://firebasestorage.googleapis.com/v0/b/online-social-2adfa.appspot.com/o/imagesPost%2F4.jpg?alt=media&token=1541f3e2-6c12-4539-8e61-cb2170a03fdd",
-        "https://firebasestorage.googleapis.com/v0/b/online-social-2adfa.appspot.com/o/imagesPost%2F3.jpg?alt=media&token=9c86bfa4-56d4-4b05-a5e0-7d00068f81dd"
-      ],
-      "commentsById": [],
-      "favouristUsersById": []
-    },
-    {
       "id": "2e678c75-d87d-4e5b-9a7d-d0919156eef0",
       "idUser": "ac0747ed-8ca2-490e-8933-1778d43a930d",
       "avatarUser": "https://firebasestorage.googleapis.com/v0/b/online-social-2adfa.appspot.com/o/imagesPost%2F3.jpg?alt=media&token=81a3b896-b350-46d9-a05c-fde4979f949d",
       "userNameUser": "maimai",
-      "detail": "hoc",
+      "detail": "hoc chơillll",
       "date": 1720418941788,
       "fullDate": "2024-07-08",
       "images": [
@@ -159,16 +129,19 @@
     }
   ],
   "userLogin": {
-    "id": "",
-    "username": "",
-    "password": "",
-    "email": "",
-    "avatar": "",
+    "id": "4f5f04f5-fa61-46b9-8287-00555b09b018",
+    "username": "ngoc",
+    "password": "Abc123",
+    "email": "ngoc@gmail.com",
+    "avatar": "https://firebasestorage.googleapis.com/v0/b/online-social-2adfa.appspot.com/o/imagesPost%2F4.jpg?alt=media&token=68d6fff5-3dba-4504-9c88-60fe8122a10f",
     "biography": "",
     "gender": "",
-    "posts": [],
+    "postsById": [
+      "aa3c66f1-0d99-448f-a2bf-8f7442c39433",
+      "00c90e7a-fa4c-4494-9b1e-2a51bbebabc3",
+      "7dab3795-7d45-41fe-9e6b-f564b6363aa2"
+    ],
     "followersById": [],
-    "followUsersById": [],
     "status": true
   },
   "commentsParent": [

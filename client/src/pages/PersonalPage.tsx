@@ -9,31 +9,33 @@ import { useNavigate } from 'react-router-dom';
 import { getUserLogin, setUserLogin} from '../services/userLogin.service';
 import axios from 'axios';
 import { activeModalAllComment, activeModalAvatar, activeModalPost } from '../store/reducers/ModalReducer';
-import ModalAvatar from '../components/ModalAvatar';
 import { Post } from '../interfaces';
 import { setPost } from '../store/reducers/PostReducer';
 import { getPosts } from '../services/posts.service';
+import { Link } from 'react-router-dom';
+import { getUsers } from '../services/users.service';
 export default function PersonalPage() {
     const userOnline:User=useSelector((state:State)=>state.userLogin);
-    const modalAvatar=useSelector((state:State)=>state.modal.avatar);
+    const users:User[]=useSelector((state:State)=>state.users);
     const posts=useSelector((state:State)=>state.posts);
     const [postsByUserOnline,setPostsByUserOnline]=useState<Post[]>([]);
     const navigate=useNavigate();
     const dispatch=useDispatch();
     //load Page when user is not login or login
     useEffect(()=>{ 
-       axios.get("http://localhost:3000/userLogin")
-       .then(response=>{
-          if(response.data.id!==''){      
-          }else{
-            navigate('/login')           
-          }
-       })
-       .catch(err=>console.log(err))
+      axios.get("http://localhost:3000/userLogin")
+    .then(response=>{
+        if(response.data.id!==''){      
+        }else{
+            navigate('/preLogin')           
+        }
+        })
+    .catch(err=>console.log(err))
     },[])
      
     useEffect(()=>{
       dispatch(getUserLogin())
+      dispatch(getUsers());
     },[])
     useEffect(()=>{
       dispatch(getPosts());
@@ -50,16 +52,13 @@ export default function PersonalPage() {
          }
       }  
       setPostsByUserOnline(newPosts)   ;   
-    },[posts,userOnline]) 
-      
-     
-        
+    },[posts,userOnline])      
     // open modal change Avatar
     const openModalAvatar=()=>{
       dispatch(activeModalAvatar());
     }
     //open Modal Post
-    const openModalModalPost=(idPost:string)=>{
+    const openModalPost=(idPost:string)=>{
         axios.get(`http://localhost:3000/posts?id=${idPost}`)
         .then(response=>dispatch(setPost(response.data[0])))
         .then(()=>dispatch(activeModalAllComment()))
@@ -68,19 +67,19 @@ export default function PersonalPage() {
   return (
 
     <div className='p-[50px] ml-[260px]'>
-      {modalAvatar&&<ModalAvatar/>}
+      
         <header className='px-[40px] flex gap-[80px] items-center'>
             <img onClick={openModalAvatar} className='cursor-pointer w-[150px] h-[150px] rounded-[50%]' src={userOnline.avatar} alt="" />
             <div className='flex flex-col gap-[30px]'>
                 <div className='flex gap-[20px] items-center'>
                     <div className='text-[20px]'>{userOnline.username}</div>
-                    <Button className='opacity-40 text-[14px]' variant="dark">Chỉnh sửa trang cá nhân</Button>
+                  <Link to={'edit'}> <Button className='opacity-40 text-[14px]' variant="dark">Chỉnh sửa trang cá nhân</Button></Link> 
                     <Button className='opacity-40 text-[14px]' variant="dark">Xem kho lưu trữ</Button>
                 </div>
                 <div className='flex gap-[40px]'>
                     <div><span className='font-bold'>{userOnline.postsById.length}</span> bài viết</div>
                     <div><span className='font-bold'>{userOnline.followersById.length}</span> người theo dõi</div> 
-                    <div>Đang theo dõi <span className='font-bold'>{userOnline.followUsersById.length}</span> người dùng</div>              
+                    <div>Đang theo dõi <span className='font-bold'>{users.filter(btn=>btn.followersById.includes(userOnline.id)).length}</span> người dùng</div>              
                 </div>
             </div>
         </header>
@@ -107,7 +106,7 @@ export default function PersonalPage() {
       {/* Post start */}
        <div className='grid grid-cols-3 gap-[5px]'>
          {postsByUserOnline.sort((a,b)=>b.date-a.date).map((post:Post)=>(
-            <img key={post.id} onClick={()=>openModalModalPost(post.id)} className='h-[300px] w-[300px] hover:opacity-85 cursor-pointer' src={post.images[0]} alt="" />
+            <img key={post.id} onClick={()=>openModalPost(post.id)} className='h-[300px] w-[300px] hover:opacity-85 cursor-pointer' src={post.images[0]} alt="" />
         ))}        
        </div>
       {/* Post end */}

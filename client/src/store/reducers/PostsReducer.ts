@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { Post } from "../../interfaces";
-import { addNewPost, getPosts, updatePosts } from "../../services/posts.service";
+import { addNewPost, deletePost, getPosts, updatePosts } from "../../services/posts.service";
 import { setPost } from "./PostReducer";
 
 const initialPosts:Post[]=[];
@@ -19,6 +19,9 @@ const postsReducer=createSlice({
         })
         .addCase(updatePosts.fulfilled,(state,action)=>{
             return state.map(btn=>btn.id===action.payload.id?action.payload:btn);
+        })
+        .addCase(deletePost.fulfilled,(state,action)=>{
+            return state.filter(btn=>btn.id!==action.payload);
         })
     },
 })
