@@ -10,6 +10,8 @@ import PostsReducer from "./reducers/PostsReducer";
 import CommentsParentReducer from "./reducers/CommentsParentReducer";
 import CommentsChildReducer from "./reducers/CommentsChildReducer";
 import UsersReducer from "./reducers/UsersReducer";
+import UserAdminReducer from "./reducers/UserAdminReducer";
+import ModalDetailUser from "../components/ModalDetailUser";
 
 export const store=configureStore({
     reducer:{
@@ -24,5 +26,6 @@ export const store=configureStore({
         post:PostReducer,
         commentsParent:CommentsParentReducer,
         commentsChild:CommentsChildReducer,
+        userAdmin:UserAdminReducer,
     }
 })

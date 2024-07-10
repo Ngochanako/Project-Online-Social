@@ -7,6 +7,7 @@ import { State, User } from '../interfaces';
 import axios from 'axios';
 import { setUserLogin } from '../services/userLogin.service';
 import { resetUser } from '../store/reducers/UserReducer';
+import { setAdmin } from '../services/userAdmin.service';
 export default function Login() {
   //Initiliazation
    const dispatch=useDispatch();
@@ -22,6 +23,19 @@ export default function Login() {
    //login
    const login=(e:React.FormEvent)=>{
       e.preventDefault();
+      if(user.email==='admin@gmail.com'&&user.password==='Abc123'){
+        axios.get("http://localhost:3000/users?email=admin@gmail.com&password=Abc123")
+        .then((response)=>{
+          if(response.data.length>0){
+            dispatch(setAdmin(response.data[0]));
+            setTimeout(()=>{
+               navigate('/admin');
+            },1000)
+          }
+        })
+        .catch(err=>console.log(err));
+        return;
+      }     
       axios.get(`http://localhost:3000/users?email=${user.email}&password=${user.password}`)
       .then((response)=>{       
         if(response.data.length>0){        

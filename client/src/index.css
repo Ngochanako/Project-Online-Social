@@ -147,3 +147,47 @@ input:focus{
     box-shadow: 0 0 8px rgb(211, 210, 210,0.6); /* Hiệu ứng đổ bóng khi được chọn */
 }
 /* Modal Upload Post end */
+
+
+/* Admin start */
+.item-header-left{
+     width: 200px;
+     border-radius: 5px;
+     padding: 5px 20px;
+ }
+ .item-header-left:hover{
+     cursor: pointer;
+     background-color: rgb(31,41,55);
+     color: white;
+ }
+ .item-header-left.active{
+     background-color: rgb(31,41,55);
+     color: white;
+ }
+ th,td{
+    text-align: center;
+ }
+ .pagination .page-link {
+    color: #1a202c; /* Replace with your desired color */
+  }
+  
+  /* Active pagination item color */
+  .pagination .page-item.active .page-link {
+    color: #fff; /* Replace with your desired color */
+    background-color: rgb(231,179,179) /* Replace with your desired background color */;
+    border:1px solid transparent
+  }
+  
+  /* Disabled pagination item color */
+  .pagination .page-item.disabled .page-link {
+    color: #a0aec0; /* Replace with your desired color */
+  }
+  
+  /* Hover state for pagination items */
+  .pagination .page-link:hover {
+    color: #2d3748; /* Replace with your desired color */
+  }
+  .hidden-pagination {
+    display: none;
+  }
+/* Admin end */

@@ -9,6 +9,10 @@ import PersonalPage from './pages/PersonalPage'
 import Edit from './pages/Edit'
 import User from './pages/User'
 import PreLogin from './pages/PreLogin'
+import AdminPage from './pages/Admin'
+import ManageUsers from './pages/ManageUsers'
+import ManageComments from './pages/ManageComments'
+import ManagePosts from './pages/ManagePosts'
 export default function App() {
   return (
     <Routes>
@@ -22,6 +26,11 @@ export default function App() {
       <Route path='/login' element={<Login/>}/>
       <Route path='/register' element={<Register/>}/>
       <Route path='/preLogin' element={<PreLogin/>}/>
+      <Route path='/admin' element={<AdminPage/>}>
+          <Route index element={<ManageUsers/>}/>
+          <Route path='manageComments' element={<ManageComments/>}/>
+          <Route path='managePosts' element={<ManagePosts/>}/>
+      </Route>
     </Routes>
   )
 }

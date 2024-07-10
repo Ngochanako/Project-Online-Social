@@ -1,6 +1,18 @@
 {
   "users": [
     {
+      "username": "admin",
+      "password": "Abc123",
+      "email": "admin@gmail.com",
+      "id": "a1",
+      "avatar": "https://firebasestorage.googleapis.com/v0/b/online-social-2adfa.appspot.com/o/imagesPost%2F4.jpg?alt=media&token=68d6fff5-3dba-4504-9c88-60fe8122a10f",
+      "biography": "",
+      "gender": "",
+      "postsById": [],
+      "followersById": [],
+      "status": true
+    },
+    {
       "id": "4f5f04f5-fa61-46b9-8287-00555b09b018",
       "username": "ngoc",
       "password": "Abc123",
@@ -57,6 +69,58 @@
       "followersById": [],
       "status": true,
       "private": true
+    },
+    {
+      "id": "9c872da3-9b0d-4e9e-9936-51d1f6703c35",
+      "username": "tuyen",
+      "password": "Abc123",
+      "email": "tuyen@gmail.com",
+      "avatar": "https://cellphones.com.vn/sforum/wp-content/uploads/2023/10/avatar-trang-4.jpg",
+      "biography": "",
+      "gender": "",
+      "postsById": [],
+      "followersById": [],
+      "status": true,
+      "private": false
+    },
+    {
+      "id": "bf7be247-40ba-4a12-b791-afaabd37ec3c",
+      "username": "haiha",
+      "password": "aBC123",
+      "email": "hai@gmail.com",
+      "avatar": "https://cellphones.com.vn/sforum/wp-content/uploads/2023/10/avatar-trang-4.jpg",
+      "biography": "",
+      "gender": "",
+      "postsById": [],
+      "followersById": [],
+      "status": true,
+      "private": false
+    },
+    {
+      "id": "a8506746-7329-445b-8cc4-e6da952de8f9",
+      "username": "minhminh",
+      "password": "Abc123",
+      "email": "minh@gmail.com",
+      "avatar": "https://cellphones.com.vn/sforum/wp-content/uploads/2023/10/avatar-trang-4.jpg",
+      "biography": "",
+      "gender": "",
+      "postsById": [],
+      "followersById": [],
+      "status": true,
+      "private": false
+    },
+    {
+      "id": "563dd052-489b-4f40-adb6-6cb4d0a3362b",
+      "username": "lyly",
+      "password": "Abc123",
+      "email": "lyly@gmail.com",
+      "avatar": "https://cellphones.com.vn/sforum/wp-content/uploads/2023/10/avatar-trang-4.jpg",
+      "biography": "",
+      "gender": "",
+      "postsById": [],
+      "followersById": [],
+      "status": true,
+      "private": false
     }
   ],
   "posts": [
@@ -223,5 +287,17 @@
       "detail": "@maimai thanks",
       "date": 1720414099756
     }
-  ]
+  ],
+  "userAdmin": {
+    "username": "admin",
+    "password": "Abc123",
+    "email": "admin@gmail.com",
+    "id": "a1",
+    "avatar": "https://firebasestorage.googleapis.com/v0/b/online-social-2adfa.appspot.com/o/imagesPost%2F4.jpg?alt=media&token=68d6fff5-3dba-4504-9c88-60fe8122a10f",
+    "biography": "",
+    "gender": "",
+    "postsById": [],
+    "followersById": [],
+    "status": true
+  }
 }

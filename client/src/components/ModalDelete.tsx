@@ -28,7 +28,7 @@ export default function ModalDelete() {
     <div onClick={closeModal} className='modal-close z-2'></div>
     <div className='flex flex-col gap-[20px] py-[20px] rounded-[10px] bg-white w-[400px] z-3'>
     <i onClick={closeModal} className="fa-solid fa-xmark z-3 text-[30px] cursor-pointer text-white top-[20px] right-[20px] absolute"></i>
-        <div className='text-center cursor-pointer text-[16px] hover:text-gray-400'>Bạn có chắc chắn muốn xóa bài viết không ?</div>
+        <div className='text-center cursor-pointer text-[16px] hover:text-gray-400'>Bạn có chắc chắn muốn xóa không ?</div>
         <hr/>
         <div onClick={deletePostModal} className='text-center cursor-pointer text-red-600 hover:text-red-400'>Xóa</div>
         <hr />

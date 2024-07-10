@@ -52,6 +52,7 @@ export type Modal={
     updatePost:boolean,
     delete:boolean,
     editPost:boolean,
+    detailUser:boolean,
 }
 export type State={
     users:User[],
@@ -64,5 +65,6 @@ export type State={
     post:Post,
     posts:Post[],
     commentsChild:CommentChild[],
-    commentsParent:CommentParent[]
+    commentsParent:CommentParent[],
+    userAdmin:User
 }

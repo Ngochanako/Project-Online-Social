@@ -9,6 +9,7 @@ const initialModal:Modal={
     updatePost:false,
     delete:false,
     editPost:false,
+    detailUser:false,
 };
 const modalReducer=createSlice({
     name:"modal",
@@ -55,8 +56,14 @@ const modalReducer=createSlice({
         },
         disableModalEditPost:(state)=>{
             state.editPost=false;
+        },
+        activeModalDetailUser:(state)=>{
+            state.detailUser=true;
+        },
+        disableModalDetailUser:(state)=>{
+            state.detailUser=false;
         }
     }
 })
-export const{activeModalAllComment,disableModalAllComment,activeModalAvatar,disableModalAvatar,activeModalPost,disableModalPost,activeModalUploadPost,disableModalUploadPost,activeModalUpdatePost,disableModalUpdatePost,activeModalDelete,disableModalDelete,activeModalEditPost,disableModalEditPost}=modalReducer.actions;
+export const{activeModalAllComment,disableModalAllComment,activeModalAvatar,disableModalAvatar,activeModalPost,disableModalPost,activeModalUploadPost,disableModalUploadPost,activeModalUpdatePost,disableModalUpdatePost,activeModalDelete,disableModalDelete,activeModalEditPost,disableModalEditPost,activeModalDetailUser,disableModalDetailUser}=modalReducer.actions;
 export default modalReducer.reducer;
