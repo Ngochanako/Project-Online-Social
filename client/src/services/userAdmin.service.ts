@@ -34,3 +34,11 @@ export const resetAdmin:any=createAsyncThunk(
         return response.data;
     }
 )
+export const getUserAdmin:any=createAsyncThunk(
+    "users/getUserAdmin",
+    async()=>{
+        const response=await axios.get("http://localhost:3000/userAdmin");
+        
+        return response.data;
+    }
+)

@@ -9,3 +9,10 @@ export const addNewGroup:any=createAsyncThunk(
         return response.data;
     }
 )
+export const getGroups:any=createAsyncThunk(
+    "groups/get",
+    async(group:Group)=>{
+        const response=await axios.get("http://localhost:3000/groups");
+        return response.data;
+    }
+)

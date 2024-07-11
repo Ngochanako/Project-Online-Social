@@ -1,6 +1,6 @@
 
 import React from 'react'
-import Home from './pages/Home'
+import Home from './pages/Client/Home'
 import Register from './pages/Register'
 import Login from './pages/Login'
 import { Route, Routes } from 'react-router-dom'
@@ -8,12 +8,12 @@ import Instagram from './components/Instagram'
 import PersonalPage from './pages/PersonalPage'
 import Edit from './pages/Edit'
 import User from './pages/User'
-import PreLogin from './pages/PreLogin'
+import PreLogin from './pages/Client/PreLogin'
 import AdminPage from './pages/Admin'
 import ManageUsers from './pages/ManageUsers'
-import ManageComments from './pages/ManageComments'
-import ManagePosts from './pages/ManagePosts'
-import Group from './pages/GroupUser'
+import ManageComments from './pages/Admin/ManageComments'
+import ManagePosts from './pages/Admin/ManagePosts'
+import Group from './pages/Client/GroupUser'
 export default function App() {
   return (
     <Routes>

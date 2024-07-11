@@ -17,11 +17,11 @@ let initialUserLogin:User={
     private:false,
     requestFollowById:[]
 }
-axios.get("http://localhost:3000/userLogin")
-.then(response=>{
-        initialUserLogin=response.data;
-       })
-.catch(err=>console.log(err))
+// axios.get("http://localhost:3000/userLogin")
+// .then(response=>{
+//         initialUserLogin=response.data;
+//        })
+// .catch(err=>console.log(err))
 const UserLoginReducer=createSlice({
     name:"userLogin",
     initialState:initialUserLogin,

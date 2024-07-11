@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { resetAdmin, setAdmin } from "../../services/userAdmin.service";
+import { getUserAdmin, resetAdmin, setAdmin } from "../../services/userAdmin.service";
 let initialUserAdmin:any={}
 axios.get("http://localhost:3000/userLogin")
 .then(response=>{
@@ -19,6 +19,9 @@ const userAdminReducer=createSlice({
         })
         .addCase(resetAdmin.fulfilled,(state,action)=>{
             return action.payload;
+        })
+        .addCase(getUserAdmin.fulfilled,(state,action)=>{
+            return action.payload
         })
     },
 })

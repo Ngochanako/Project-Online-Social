@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
-import { getUserLogin, resetUserLogin, setUserLogin } from '../services/userLogin.service';
+import { getUserLogin, resetUserLogin, setUserLogin } from '../../services/userLogin.service';
 import { NavLink } from "react-router-dom";
-import ModalCreatePost from "../components/ModalCreatePost";
-import { State, User } from "../interfaces";
-import { activeModalPost } from "../store/reducers/ModalReducer";
-import ModalUploadPost from "../components/ModalUploadPost";
-import ModalAllComment from "../components/ModalAllComment";
-import ModalUpdatePost from "../components/ModalUpdatePost";
-import ModalDelete from "../components/ModalDelete";
-import ModalEditPost from "../components/ModalEditPost";
-import ModalAvatar from "../components/ModalAvatar";
+import ModalCreatePost from "../../components/ModalCreatePost";
+import { State, User } from "../../interfaces";
+import { activeModalPost } from "../../store/reducers/ModalReducer";
+import ModalUploadPost from "../../components/ModalUploadPost";
+import ModalAllComment from "../../components/ModalAllComment";
+import ModalUpdatePost from "../../components/ModalUpdatePost";
+import ModalDelete from "../../components/ModalDelete";
+import ModalEditPost from "../../components/ModalEditPost";
+import ModalAvatar from "../../components/ModalAvatar";
 import axios from "axios";
-import { getUsers, updateUser } from "../services/users.service";
+import { getUsers, updateUser } from "../../services/users.service";
 import Button from 'react-bootstrap/Button';
 
 export default function Home() {

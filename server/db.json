@@ -318,5 +318,19 @@
     "status": true,
     "requestFollowById": []
   },
-  "groups":[]
+  "groups": [
+    {
+      "id": "d23255f6-df8e-409e-aabb-e38edb23a0e8",
+      "groupName": "ăn uống",
+      "usersById": [
+        "a1b0fa13-a9e1-4ba2-a756-9f32012aadae",
+        "17630eb4-0bc0-445e-a403-6701c9a1fd59",
+        "4f5f04f5-fa61-46b9-8287-00555b09b018"
+      ],
+      "status": true,
+      "avatar": "https://cellphones.com.vn/sforum/wp-content/uploads/2023/10/avatar-trang-4.jpg",
+      "private": false,
+      "adminById": "4f5f04f5-fa61-46b9-8287-00555b09b018"
+    }
+  ]
 }
