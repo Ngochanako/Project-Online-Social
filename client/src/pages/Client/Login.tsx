@@ -3,11 +3,12 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { State, User } from '../interfaces';
 import axios from 'axios';
-import { setUserLogin } from '../services/userLogin.service';
-import { resetUser } from '../store/reducers/UserReducer';
-import { setAdmin } from '../services/userAdmin.service';
+import { State, User } from '../../interfaces';
+import { setAdmin } from '../../services/userAdmin.service';
+import { setUserLogin } from '../../services/userLogin.service';
+import { resetUser } from '../../store/reducers/UserReducer';
+
 export default function Login() {
   //Initiliazation
    const dispatch=useDispatch();

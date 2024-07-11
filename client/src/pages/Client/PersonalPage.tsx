@@ -1,19 +1,16 @@
 
 import { useSelector } from 'react-redux'
-import { State } from '../interfaces'
 import Button from 'react-bootstrap/Button';
 import { useEffect, useState } from 'react';
-import { User } from '../interfaces';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { getUserLogin, setUserLogin} from '../services/userLogin.service';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { activeModalAllComment, activeModalAvatar, activeModalPost } from '../store/reducers/ModalReducer';
-import { Post } from '../interfaces';
-import { setPost } from '../store/reducers/PostReducer';
-import { getPosts } from '../services/posts.service';
-import { Link } from 'react-router-dom';
-import { getUsers } from '../services/users.service';
+import { activeModalAllComment, activeModalAvatar, activeModalPost } from '../../store/reducers/ModalReducer';
+import { Post, State, User } from '../../interfaces';
+import { getUserLogin } from '../../services/userLogin.service';
+import { getUsers } from '../../services/users.service';
+import { getPosts } from '../../services/posts.service';
+import { setPost } from '../../store/reducers/PostReducer';
 export default function PersonalPage() {
     const userOnline:User=useSelector((state:State)=>state.userLogin);
     const users:User[]=useSelector((state:State)=>state.users);

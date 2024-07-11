@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react'
 import Table from 'react-bootstrap/Table';
 import { useDispatch, useSelector } from 'react-redux';
-import { State, User } from '../interfaces';
 import Button from 'react-bootstrap/Button';
-import { getUsers, updateUser } from '../services/users.service';
-import ModalDetailUser from '../components/ModalDetailUser';
-import { activeModalDetailUser } from '../store/reducers/ModalReducer';
 import axios from 'axios';
 import Pagination from 'react-bootstrap/Pagination';
+import { State, User } from '../../interfaces';
+import { getUsers, updateUser } from '../../services/users.service';
+import { activeModalDetailUser } from '../../store/reducers/ModalReducer';
+import ModalDetailUser from '../../components/ModalDetailUser';
 export default function ManageUsers() {
     const dispatch=useDispatch();
     const usersAPI=useSelector((state:State)=>state.users);

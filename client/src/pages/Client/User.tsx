@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom'
-import { Post, State } from '../interfaces';
-import type { User } from '../interfaces';
 import axios from 'axios';
-import { getUserLogin } from '../services/userLogin.service';
-import { getUsers, updateUser } from '../services/users.service';
-import { getPosts } from '../services/posts.service';
-import { setPost } from '../store/reducers/PostReducer';
-import { activeModalAllComment } from '../store/reducers/ModalReducer';
+import { getUserLogin } from '../../services/userLogin.service';
+import { getPosts } from '../../services/posts.service';
+import { setPost } from '../../store/reducers/PostReducer';
+import { activeModalAllComment } from '../../store/reducers/ModalReducer';
+import { Post, State } from '../../interfaces';
+import type { User } from '../../interfaces';
+import { getUsers, updateUser } from '../../services/users.service';
 export default function User() {
     const {id}=useParams();
     const dispatch=useDispatch();

@@ -2,14 +2,12 @@ import React, { useEffect, useState } from 'react'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useDispatch, useSelector } from 'react-redux';
-import { State, User } from '../interfaces';
-import { getUsers } from '../services/users.service';
-import Alert from 'react-bootstrap/Alert';
 import { v4 as uuidv4 } from 'uuid';
-import { registerUser } from '../services/users.service';
+import { getUsers, registerUser } from '../../services/users.service';
 import { useNavigate } from 'react-router-dom';
-import { setUser } from '../store/reducers/UserReducer';
+import { setUser } from '../../store/reducers/UserReducer';
 import axios from 'axios';
+import { State, User } from '../../interfaces';
 
 export default function Register() {
   //Initialization

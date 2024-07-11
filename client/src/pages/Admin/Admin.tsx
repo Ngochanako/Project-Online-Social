@@ -3,8 +3,9 @@ import React, { useEffect, useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { State } from '../interfaces';
-import { getUserAdmin, resetAdmin } from '../services/userAdmin.service';
+import { State } from '../../interfaces';
+import { getUserAdmin } from '../../services/userAdmin.service';
+import { resetAdmin } from '../../services/userAdmin.service';
 import axios from 'axios';
 export default function AdminPage() {
   const [active,setActive]=useState<boolean>(false);

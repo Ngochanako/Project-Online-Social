@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { State, User } from '../interfaces'
-import { getUserLogin, setUserLogin } from '../services/userLogin.service';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { activeModalAvatar } from '../store/reducers/ModalReducer';
-import { updateUser } from '../services/users.service';
+import { State, User } from '../../interfaces';
+import { getUserLogin, setUserLogin } from '../../services/userLogin.service';
+import { activeModalAvatar } from '../../store/reducers/ModalReducer';
+import { updateUser } from '../../services/users.service';
 export default function Edit() {
     const userOnline=useSelector((state:State)=>state.userLogin);
     const navigate=useNavigate();
