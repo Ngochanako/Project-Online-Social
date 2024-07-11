@@ -10,7 +10,8 @@
       "gender": "",
       "postsById": [],
       "followersById": [],
-      "status": true
+      "status": true,
+      "requestFollowById": []
     },
     {
       "id": "4f5f04f5-fa61-46b9-8287-00555b09b018",
@@ -26,7 +27,8 @@
         "7dab3795-7d45-41fe-9e6b-f564b6363aa2"
       ],
       "followersById": [],
-      "status": true
+      "status": true,
+      "requestFollowById": []
     },
     {
       "id": "a1b0fa13-a9e1-4ba2-a756-9f32012aadae",
@@ -38,7 +40,10 @@
       "gender": "",
       "postsById": [],
       "followersById": [],
-      "status": true
+      "status": true,
+      "requestFollowById": [
+        "4f5f04f5-fa61-46b9-8287-00555b09b018"
+      ]
     },
     {
       "id": "17630eb4-0bc0-445e-a403-6701c9a1fd59",
@@ -52,7 +57,8 @@
       "followersById": [
         "4f5f04f5-fa61-46b9-8287-00555b09b018"
       ],
-      "status": true
+      "status": true,
+      "requestFollowById": []
     },
     {
       "id": "ac0747ed-8ca2-490e-8933-1778d43a930d",
@@ -68,7 +74,8 @@
       ],
       "followersById": [],
       "status": true,
-      "private": true
+      "private": true,
+      "requestFollowById": []
     },
     {
       "id": "9c872da3-9b0d-4e9e-9936-51d1f6703c35",
@@ -81,7 +88,8 @@
       "postsById": [],
       "followersById": [],
       "status": true,
-      "private": false
+      "private": false,
+      "requestFollowById": []
     },
     {
       "id": "bf7be247-40ba-4a12-b791-afaabd37ec3c",
@@ -94,7 +102,8 @@
       "postsById": [],
       "followersById": [],
       "status": true,
-      "private": false
+      "private": false,
+      "requestFollowById": []
     },
     {
       "id": "a8506746-7329-445b-8cc4-e6da952de8f9",
@@ -107,7 +116,8 @@
       "postsById": [],
       "followersById": [],
       "status": true,
-      "private": false
+      "private": false,
+      "requestFollowById": []
     },
     {
       "id": "563dd052-489b-4f40-adb6-6cb4d0a3362b",
@@ -120,7 +130,8 @@
       "postsById": [],
       "followersById": [],
       "status": true,
-      "private": false
+      "private": false,
+      "requestFollowById": []
     }
   ],
   "posts": [
@@ -136,7 +147,8 @@
         "https://firebasestorage.googleapis.com/v0/b/online-social-2adfa.appspot.com/o/imagesPost%2F1.jpg?alt=media&token=a722ece9-7db1-481c-a77f-c0cf71654a13"
       ],
       "commentsById": [],
-      "favouristUsersById": []
+      "favouristUsersById": [],
+      "requestFollowById": []
     },
     {
       "id": "00c90e7a-fa4c-4494-9b1e-2a51bbebabc3",
@@ -155,7 +167,8 @@
       ],
       "favouristUsersById": [
         "ac0747ed-8ca2-490e-8933-1778d43a930d"
-      ]
+      ],
+      "requestFollowById": []
     },
     {
       "id": "7dab3795-7d45-41fe-9e6b-f564b6363aa2",
@@ -173,8 +186,10 @@
         "b23d275d-e8e2-481d-ba23-adb4a620339c"
       ],
       "favouristUsersById": [
-        "ac0747ed-8ca2-490e-8933-1778d43a930d"
-      ]
+        "ac0747ed-8ca2-490e-8933-1778d43a930d",
+        "4f5f04f5-fa61-46b9-8287-00555b09b018"
+      ],
+      "requestFollowById": []
     },
     {
       "id": "2e678c75-d87d-4e5b-9a7d-d0919156eef0",
@@ -188,7 +203,8 @@
         "https://firebasestorage.googleapis.com/v0/b/online-social-2adfa.appspot.com/o/imagesPost%2FNguy%E1%BB%85n%20Th%E1%BB%8B%20Ng%E1%BB%8Dc.jpg?alt=media&token=07d44116-3a19-4df0-879b-56166bdb11e4"
       ],
       "commentsById": [],
-      "favouristUsersById": []
+      "favouristUsersById": [],
+      "requestFollowById": []
     }
   ],
   "userLogin": {
@@ -205,7 +221,8 @@
       "7dab3795-7d45-41fe-9e6b-f564b6363aa2"
     ],
     "followersById": [],
-    "status": true
+    "status": true,
+    "requestFollowById": []
   },
   "commentsParent": [
     {
@@ -298,6 +315,8 @@
     "gender": "",
     "postsById": [],
     "followersById": [],
-    "status": true
-  }
+    "status": true,
+    "requestFollowById": []
+  },
+  "groups":[]
 }

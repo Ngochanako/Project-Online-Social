@@ -12,6 +12,8 @@ const initialPost:Post={
     images:[],
     commentsById:[],
     favouristUsersById:[], 
+    idGroup:null,
+    status:true
 }
 const postReducer=createSlice({
     name:"post",

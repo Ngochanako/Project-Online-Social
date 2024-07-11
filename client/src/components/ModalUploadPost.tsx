@@ -58,7 +58,9 @@ export default function ModalUploadPost() {
                 fullDate:new Date().toISOString().split('T')[0],
                 images:newImgs,
                 commentsById:[],
-                favouristUsersById:[], 
+                favouristUsersById:[],
+                idGroup:null,
+                status:true 
                }             
                let editUser:User={...userOnline,postsById:[...userOnline.postsById,newPost.id]};      
                dispatch(setUserLogin(editUser));

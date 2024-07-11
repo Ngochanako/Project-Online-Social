@@ -14,7 +14,6 @@ export default function User() {
     const dispatch=useDispatch();
     const navigate=useNavigate();
     const userOnline=useSelector((state:State)=>state.userLogin);
-    const test=useSelector((state:State)=>state);
 
     const users=useSelector((state:State)=>state.users);
     const posts=useSelector((state:State)=>state.posts);
@@ -30,6 +29,7 @@ export default function User() {
       followersById:[],
       status:true,
       private:false,
+      requestFollowById:[]
     });
     const [postsByUser,setPostsByUser]=useState<Post[]>([]);
     useEffect(()=>{ 
@@ -57,6 +57,16 @@ export default function User() {
     const newPosts=posts.filter(btn=>user.postsById.includes(btn.id));
     setPostsByUser(newPosts); 
   },[posts,user])
+  //return Status fOLLOW
+  const returnStatusFollow=()=>{
+     if(user.followersById.includes(userOnline.id)){
+      return "Hủy theo dõi"
+     }
+     if(user.requestFollowById.includes(userOnline.id)){
+      return "Hủy gửi yêu cầu theo dõi"
+     }
+     return "Theo dõi"
+  }
   //open Modal Post
   const openModalPost=(idPost:string)=>{
     axios.get(`http://localhost:3000/posts?id=${idPost}`)
@@ -75,14 +85,20 @@ export default function User() {
        }
        dispatch(updateUser(newUser));
        
+    }else if(!user.requestFollowById.includes(userOnline.id)){
+      let newUser={
+        ...user,
+        requestFollowById:[...user.requestFollowById,userOnline.id]
+      }
+      
+      dispatch(updateUser({...newUser}))     
     }else{
       let newUser={
         ...user,
-        followersById:[...user.followersById,userOnline.id]
+        requestFollowById:user.requestFollowById.filter(btn=>btn!==userOnline.id)
       }
       
-      dispatch(updateUser({...newUser}))
-      
+      dispatch(updateUser({...newUser})) 
     }
   }
   return (
@@ -93,7 +109,7 @@ export default function User() {
             <div className='flex flex-col gap-[30px]'>
                 <div className='flex gap-[20px] items-center'>
                     <div className='text-[20px]'>{user.username}</div>
-                    <div onClick={handleFollow} className='bg-[rgb(239,239,239)] cursor-pointer rounded-[5px] text-orange-500 px-[10px] py-[5px]'>{user.followersById.includes(userOnline.id)?'Đang theo dõi':'Theo dõi'}</div>
+                    <div onClick={handleFollow} className='bg-[rgb(239,239,239)] cursor-pointer rounded-[5px] text-orange-500 px-[10px] py-[5px]'>{returnStatusFollow()}</div>
                 </div>
                 <div className='flex gap-[40px]'>
                     <div><span className='font-bold'>{user.postsById.length}</span> bài viết</div>

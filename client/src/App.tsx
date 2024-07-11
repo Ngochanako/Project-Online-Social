@@ -13,6 +13,7 @@ import AdminPage from './pages/Admin'
 import ManageUsers from './pages/ManageUsers'
 import ManageComments from './pages/ManageComments'
 import ManagePosts from './pages/ManagePosts'
+import Group from './pages/GroupUser'
 export default function App() {
   return (
     <Routes>
@@ -22,6 +23,7 @@ export default function App() {
         </Route>
         <Route path='personal/edit' element={<Edit/>}/>
         <Route path='user/:id' element={<User/>}/>
+        <Route path='group' element={<Group/>}/>
       </Route>
       <Route path='/login' element={<Login/>}/>
       <Route path='/register' element={<Register/>}/>

@@ -33,7 +33,8 @@ export default function Register() {
     postsById:[],
     followersById:[],
     status:true,
-    private:false
+    private:false,
+    requestFollowById:[]
   })
   //reset User
   const resetUser=()=>{
@@ -49,6 +50,7 @@ export default function Register() {
     followersById:[],
     status:true,
     private:false,
+    requestFollowById:[]
     })
   }
   //Validate Email

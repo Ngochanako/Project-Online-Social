@@ -170,7 +170,6 @@ input:focus{
  .pagination .page-link {
     color: #1a202c; /* Replace with your desired color */
   }
-  
   /* Active pagination item color */
   .pagination .page-item.active .page-link {
     color: #fff; /* Replace with your desired color */

@@ -24,7 +24,8 @@ export default function Instagram() {
       postsById:[],
       followersById:[],
       status:true,
-      private:false
+      private:false,
+      requestFollowById:[]
     });
    // get Users from API
     useEffect(()=>{
@@ -40,7 +41,8 @@ export default function Instagram() {
     },[])
     //get usersUnFollow
     useEffect(()=>{
-      const newUsers = users.filter(btn =>!btn.followersById.includes(userOnline.id)&&btn.id!==userOnline.id);      
+      const newUsers = users.filter(btn =>!btn.followersById.includes(userOnline.id)&&btn.id!==userOnline.id&&!btn.requestFollowById.includes(userOnline.id));  
+
       setUsersUnFollow(newUsers);     
     },[users,userOnline])
     // follow User
@@ -50,7 +52,7 @@ export default function Instagram() {
         if(userFollow){
           const newUser={
             ...userFollow,
-            followersById:[...userFollow.followersById,userOnline.id]
+            requestFollowById:[...userFollow.requestFollowById,userOnline.id]
            }
            setUser(newUser);
            dispatch(updateFollowersUser(newUser));
@@ -59,7 +61,7 @@ export default function Instagram() {
         }      
     }
   return (
-    <div className='flex ml-[230px]'>
+    <div className='flex ml-[230px]' >
           {/* Posts start */}
       <Posts/>
       {/* Posts end */}

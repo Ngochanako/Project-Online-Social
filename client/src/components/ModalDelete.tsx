@@ -35,6 +35,6 @@ export default function ModalDelete() {
         <div onClick={closeModal} className='cursor-pointer text-center hover:text-gray-400'>Hủy</div>           
     </div>
   
-</div>
+    </div>
   )
 }

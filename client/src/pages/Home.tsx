@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
-import { resetUserLogin } from '../services/userLogin.service';
+import { getUserLogin, resetUserLogin, setUserLogin } from '../services/userLogin.service';
 import { NavLink } from "react-router-dom";
 import ModalCreatePost from "../components/ModalCreatePost";
 import { State, User } from "../interfaces";
@@ -13,9 +13,14 @@ import ModalDelete from "../components/ModalDelete";
 import ModalEditPost from "../components/ModalEditPost";
 import ModalAvatar from "../components/ModalAvatar";
 import axios from "axios";
+import { getUsers, updateUser } from "../services/users.service";
+import Button from 'react-bootstrap/Button';
+
 export default function Home() {
     //Initialization
     const modalAllComment=useSelector((state:State)=>state.modal.comments);
+    const userOnline=useSelector((state:State)=>state.userLogin);
+    const users=useSelector((state:State)=>state.users)
     const [viewmore,setViewmore]=useState<boolean>(false);
     const navigate=useNavigate();
     const dispatch=useDispatch();
@@ -27,6 +32,18 @@ export default function Home() {
     const modalAvatar=useSelector((state:State)=>state.modal.avatar);
     const [usersSearch,setUsersSearch]=useState<User[]>([]);
     const [search,setSearch]=useState<Boolean>(false);
+    const [requestFollow,setRequestFollow]=useState<Boolean>(false);
+    const [usersRequestFollow,setUsersRequest]=useState<User[]>([]);
+    //get UserLogin
+    useEffect(()=>{
+      dispatch(getUserLogin())
+      dispatch(getUsers())
+    },[])
+    //get list user request follow
+    useEffect(()=>{
+       let newusers=users.filter(btn=>userOnline.requestFollowById.includes(btn.id));
+       setUsersRequest(newusers);
+    },[users,userOnline])
   //click viewmore
   const handleClickViewMore=(e:React.MouseEvent<HTMLDivElement>)=>{
     setViewmore(!viewmore);
@@ -73,9 +90,35 @@ export default function Home() {
   const closeSearch=()=>{
     setSearch(false)
   }
+  //open Request Follow
+  const openRequestFollow=()=>{
+    setRequestFollow(!requestFollow);
+  }
+  const closeRequestFollow=()=>{
+    setRequestFollow(false);
+  }
+  //confirm Follow
+  const confirmRequestFollow=(id:string)=>{
+     let newUser={
+      ...userOnline,
+      followersById:[...userOnline.followersById,id],
+      requestFollowById:userOnline.requestFollowById.filter(btn=>btn!==id)
+     }
+    dispatch(updateUser(newUser));
+    dispatch(setUserLogin(newUser));
+  }
+  //cancel Follow
+  const cancelRequestFollow=(id:string)=>{
+    let newUser={
+      ...userOnline,
+      requestFollowById:userOnline.requestFollowById.filter(btn=>btn!==id)
+    }
+    dispatch(updateUser(newUser));
+    dispatch(setUserLogin(newUser));
+  }
   return (
     <div className=''>
-      <div onClick={closeSearch} className="fixed top-0 right-0 left-0 bottom-0"></div>
+      
        {modalAllComment &&<ModalAllComment/>}
         {modalPost && <ModalCreatePost/>}
         {modalUploadPost && <ModalUploadPost/>}
@@ -99,6 +142,7 @@ export default function Home() {
           <div  className=''>Tìm kiếm</div>
           {search&&
           <div className="absolute z-1000 top-0 left-20 w-[400px] h-[99%]  bg-white flex flex-col gap-[50px] rounded-r-[10px] shadow-lg">
+            <i onClick={closeSearch} className="fa-solid fa-xmark z-3 text-[30px] cursor-pointer text-gray-600 top-[20px] right-[20px] absolute"></i>
               <div className="text-[20px] font-bold px-[50px] pt-[50px]">Tìm kiếm</div>
               <input onChange={handleSearch} type="text" className="mx-[50px] bg-[rgb(239,239,239)] p-[10px] text-[14px]" placeholder="Tìm kiếm người dùng" />
               <hr className=""/>
@@ -114,16 +158,42 @@ export default function Home() {
                   ))}
                   
               </div>
+              
           </div>}
         </div>
         <div className='header-list-item'>
-         <i className="fa-solid fa-plane text-[#565555] text-[22px]"></i>
-          <div className=''>Khám phá</div>
+         <i className="fa-solid fa-user-plus text-[#565555] text-[22px]"></i>
+          <div onClick={openRequestFollow} className=''>Theo dõi</div>
+          {userOnline.requestFollowById.length>0&&<div className="w-[20px] h-[20px] rounded-[50%] bg-red-500 text-white flex justify-center items-center absolute right-[190px] top-[220px]">{userOnline.requestFollowById.length}</div>}
+          
+          {requestFollow&&
+          <div className="absolute z-1000 top-0 left-20 w-[400px] h-[99%]  bg-white flex flex-col gap-[50px] rounded-r-[10px] shadow-lg">
+            <i onClick={closeRequestFollow} className="fa-solid fa-xmark z-3 text-[30px] cursor-pointer text-gray-600 top-[20px] right-[20px] absolute"></i>
+              <div className="text-[20px] font-bold px-[50px] pt-[50px]">Yêu cầu theo dõi</div>
+              <hr className=""/>
+              <div className="flex flex-col gap-[20px] px-[50px]">
+                  {usersRequestFollow.map(btn=>(
+                      <div key={btn.id} className="flex items-center justify-center gap-[10px]">
+                          <Link to={`/user/${btn.id}`}><img className="w-[50px] h-[50px] rounded-[50%]" src={btn.avatar} alt="" /></Link>
+                          <div>
+                            <Link to={`/user/${btn.id}`}><p className="font-bold">{btn.username}</p></Link>
+                            <div className="flex gap-[20px]">
+                            <Button onClick={()=>confirmRequestFollow(btn.id)} variant="primary">Xác nhận</Button>
+                            <Button onClick={()=>cancelRequestFollow(btn.id)} variant="secondary">Xóa</Button>
+                            </div>
+                          </div>
+                      </div>
+                      
+                  ))}              
+              </div>             
+          </div>}
         </div>
-        <div className='header-list-item'>
-          <i className="fa-solid fa-video text-[#565555] text-[22px]"></i>
-          <div className=''>Reels</div>
-        </div>
+        <NavLink style={active} to={'group'} className='header-list-item'>
+       
+          <i className="fa-solid fa-user-group text-[#565555] text-[22px]"></i>
+          <div className=''>Nhóm</div>
+       
+        </NavLink>
         <div className='header-list-item'>
         <i className="fa-brands fa-facebook-messenger text-[#565555] text-[22px]"></i>
           <div className=''>Tin nhắn</div>

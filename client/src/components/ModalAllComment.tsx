@@ -17,7 +17,19 @@ export default function ModalAllComment() {
     const userOnline=useSelector((state:State)=>state.userLogin)
     const dispatch=useDispatch();
     const post:Post=useSelector((state:State)=>state.post);
-    const [user,setUser]=useState<any>({});
+    const [user,setUser]=useState<any>({
+        id:'',
+        username:'',
+        password:'',
+        email:'',
+        avatar:'',
+        biography:'',
+        gender:'',
+        postsById:[],
+        followersById:[],
+        status:true,
+        private:true
+    });
     const [visibleComments,setVisibleComment]=useState<any>({});
     const [idCommentViewMore,setIdCommentViewMore]=useState<string>('');
     const [valueComment, setValueComment]=useState<string>('');
@@ -52,7 +64,8 @@ export default function ModalAllComment() {
         axios.get(`http://localhost:3000/users/${post.idUser}`)
         .then(response=>setUser(response.data))
         .catch(err=>console.log(err))
-    },[])
+        
+    },[post])
     //close Modal
     const closeModal=()=>{
         dispatch(disableModalAllComment())
@@ -150,6 +163,8 @@ export default function ModalAllComment() {
     const openModalUpdatePost=()=>{
         dispatch(activeModalUpdatePost())
     }
+    console.log(user);
+    
   return (
     <div className='modal'>
         <div onClick={closeModal} className='modal-close'></div>
@@ -172,7 +187,7 @@ export default function ModalAllComment() {
                 <div className='flex justify-between'>
                     <div className='flex items-center'>
                             <img className='w-[50px] h-[50px] rounded-[50%]' src={user.avatar} alt="" />
-                            <div className='font-bold'><Link to={`/user/${user.id}`}>{user.username}</Link> {!userOnline.followUsersById.includes(user.id)?(<span onClick={followUser} className='text-[rgb(79,70,229)] font-bold'> Theo dõi</span>):('')}</div>
+                            <div className='font-bold'><Link to={`/user/${user.id}`}>{user.username}</Link></div>
                     </div>
                     <div onClick={openModalUpdatePost} className='flex items-center gap-[5px] cursor-pointer hover:text-gray-400'>
                         <div className='w-[3px] h-[3px] bg-gray-600 rounded-[50%]'></div>

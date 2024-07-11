@@ -29,7 +29,9 @@ export type Post={
     fullDate:string,
     images:string[],
     commentsById:string[],
-    favouristUsersById:string[],   
+    favouristUsersById:string[], 
+    idGroup:string|null,
+    status:true  
 }
 export type User={
     id:string,
@@ -42,7 +44,8 @@ export type User={
     postsById:string[],
     followersById:string[],
     status:boolean,
-    private:boolean
+    private:boolean,
+    requestFollowById:string[]
 }
 export type Modal={
     comments:boolean,
@@ -53,6 +56,15 @@ export type Modal={
     delete:boolean,
     editPost:boolean,
     detailUser:boolean,
+}
+export type Group={
+    id:string,
+    groupName:string,
+    usersById:string[],
+    status:boolean,
+    avatar:string,
+    private:boolean,
+    adminById:string,
 }
 export type State={
     users:User[],
@@ -66,5 +78,7 @@ export type State={
     posts:Post[],
     commentsChild:CommentChild[],
     commentsParent:CommentParent[],
-    userAdmin:User
+    userAdmin:User,
+    groups:Group[],
+    group:Group
 }

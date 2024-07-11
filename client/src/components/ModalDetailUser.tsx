@@ -21,6 +21,11 @@ export default function ModalDetailUser({user}:Prop) {
         </div>
         <hr/>
         <div className='flex gap-[5px]'>
+            <div className='font-bold'>Password:</div>
+            <div>{user.password}</div>
+        </div>
+        <hr/>
+        <div className='flex gap-[5px]'>
             <div className='font-bold'>Gender:</div>
             <div>{user.gender}</div>
         </div>

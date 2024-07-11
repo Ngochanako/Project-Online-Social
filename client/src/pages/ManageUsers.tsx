@@ -24,7 +24,8 @@ export default function ManageUsers() {
         postsById:[],
         followersById:[],
         status:true,
-        private:true
+        private:true,
+        requestFollowById:[]
     })
     const [users,setUsersAdmin]=useState<User[]>([]);
     const [usersByTotal,setUsersByTotal]=useState<User[]>([]);
