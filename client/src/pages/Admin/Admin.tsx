@@ -66,37 +66,31 @@ export default function AdminPage() {
 
        <div className='flex'>
           {/* Start Header-Left */}
-          <header onMouseEnter={handleMouseHeaderLeft} className={` flex flex-col w-[${widthHeaderLeft}] py-[20px] bg-[rgb(17,24,39)] text-[rgb(156,163,175)]  rounded-r-[5px] transition-all duration-[500ms]`}>
+          <header onMouseEnter={handleMouseHeaderLeft} className={` flex flex-col w-[${widthHeaderLeft}] py-[20px] bg-[rgb(17,24,39)] text-[rgb(156,163,175)]  rounded-r-[5px] transition-all duration-[500ms] min-h-[600px]`}>
               {/* <div className='flex gap-1 bg-white text-black p-1 m-[10px] rounded-[5px] items-center'>
               <i className='bx bx-plus'></i>
               <p>New Item</p>
               </div> */}
               <i onClick={handleMouseHeaderLeft} className='bx bx-menu text-[30px] ml-[20px] cursor-pointer hover:text-[rgb(31,41,55)]'></i>
-              <NavLink to={'/admin'} style={activeHeader}>
-              <div className='list-item-header-left'>
-                <div className=' flex justify-between p-2 items-center'>
-                    <div className='item-header-left active flex gap-3 items-center' >
-                        <i className='bx bxs-user'></i>
-                        {hiddenHeader&&<p>Users</p>}
-                    </div>
-                    <div onClick={handleActive} >{hiddenHeader&&<i className='bx bx-chevron-down bx-sm bx-fade-down-hover'></i>}</div>                          
-                </div>
-                {active && <div className=' text-white pl-[25px] flex flex-col gap-2'>
-                    
-                </div>}
-              </div>
-              </NavLink>
-              
-              <NavLink to={'/manageComments'} style={activeHeader}> 
+              <NavLink to={'/admin'} style={activeHeader}> 
               <div className='list-item-header-left flex justify-between p-2 items-center'>
                   <div className='item-header-left flex gap-3 items-center' >
-                  <i className='bx bxs-chat'></i>                   
-                  {hiddenHeader&&<p>Comments</p>}
+                  <i className='bx bxs-user'></i>                   
+                  {hiddenHeader&&<p>Users</p>}
                   </div>
                   <div>{hiddenHeader&&<i className='bx bx-chevron-down bx-sm bx-fade-down-hover'></i>}</div>
               </div>
               </NavLink>
-              <NavLink to={'/managePosts'} style={activeHeader}> 
+              <NavLink to={'manageGroups'} style={activeHeader}> 
+              <div className='list-item-header-left flex justify-between p-2 items-center'>
+                  <div className='item-header-left flex gap-3 items-center' >
+                  <i className='bx bxs-chat'></i>                   
+                  {hiddenHeader&&<p>Groups</p>}
+                  </div>
+                  <div>{hiddenHeader&&<i className='bx bx-chevron-down bx-sm bx-fade-down-hover'></i>}</div>
+              </div>
+              </NavLink>
+              <NavLink to={'managePosts'} style={activeHeader}> 
               <div className='list-item-header-left flex justify-between p-2 items-center'>
                   <div className=' item-header-left flex gap-3 items-center' >
                   <i className='bx bxs-book'></i>

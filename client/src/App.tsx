@@ -11,9 +11,9 @@ import User from './pages/Client/User'
 import PreLogin from './pages/Client/PreLogin'
 import AdminPage from './pages/Admin/Admin'
 import ManageUsers from './pages/Admin/ManageUsers'
-import ManageComments from './pages/Admin/ManageComments'
 import ManagePosts from './pages/Admin/ManagePosts'
 import Group from './pages/Client/GroupUser'
+import ManageGroups from './pages/Admin/ManageGroups'
 export default function App() {
   return (
     <Routes>
@@ -27,10 +27,10 @@ export default function App() {
       </Route>
       <Route path='/login' element={<Login/>}/>
       <Route path='/register' element={<Register/>}/>
-      <Route path='/preLogin' element={<PreLogin/>}/>
+      <Route path='/preLogin' element={<PreLogin/>}/> 
       <Route path='/admin' element={<AdminPage/>}>
           <Route index element={<ManageUsers/>}/>
-          <Route path='manageComments' element={<ManageComments/>}/>
+          <Route path='manageGroups' element={<ManageGroups/>}/>
           <Route path='managePosts' element={<ManagePosts/>}/>
       </Route>
     </Routes>

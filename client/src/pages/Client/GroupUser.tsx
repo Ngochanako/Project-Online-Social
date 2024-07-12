@@ -114,8 +114,13 @@ export default function GroupUser() {
    //form create new group end
 
    //handle form view group
-   const searchGroup=()=>{}
-   
+   const handleSearchGroup=(e:React.ChangeEvent<HTMLInputElement>)=>{
+       if(e.target.value.trim()==''){
+        setGroupsByUserOnline(groups);
+       }
+       let newGroup=groups.filter(btn=>btn.groupName.includes(e.target.value.trim()));
+       setGroupsByUserOnline(newGroup);
+   }
   return (
     <div className='ml-[260px] flex'>
       {/* Header Left Start */}
@@ -164,13 +169,13 @@ export default function GroupUser() {
               <p>New Group</p>
           </div>
           <div className='flex items-center gap-[10px]'>
-                  <input onChange={handleChange} type="text" placeholder='Tìm kiếm nhóm' className='p-[10px] rounded-[10px] bg-[rgb(240,242,245)] text-[14px] w-[100%] ' value={valueSearch} />
-                  <i onClick={searchGroup} className='bx bx-search right-0 top-1 bx-sm cursor-pointer'></i>
+                  <input onChange={handleSearchGroup} type="text" placeholder='Tìm kiếm nhóm' className='p-[10px] rounded-[10px] bg-[rgb(240,242,245)] text-[14px] w-[100%] ' value={valueSearch} />
+                  {/* <i onClick={searchGroup} className='bx bx-search right-0 top-1 bx-sm cursor-pointer'></i> */}
           </div>
           <div className='overflow-auto'>
                 {groupsByUserOnline.map(btn=>(
-                   <div key={btn.id} className="flex items-center justify-center gap-[10px] hover:bg-[]rgb(240,242,245) rounded-[5px] hover:bg-[rgb(240,242,245)] cursor-pointer">
-                   <Link to={`/user/${btn.id}`}><img className="w-[50px] h-[50px] rounded-[50%] cursor-pointer" src={btn.avatar} alt="" /></Link>
+                   <div key={btn.id} className="flex items-center gap-[0px] rounded-[5px] hover:bg-[rgb(240,242,245)] px-[10px] py-[5px] cursor-pointer">
+                   <Link to={`/user/${btn.id}`}><img className="w-[50px] h-[50px] rounded-[10px] cursor-pointer" src={btn.avatar} alt="" /></Link>
                    <div>
                      <Link to={`/user/${btn.id}`}><p className="font-bold cursor-pointer">{btn.groupName}</p></Link>
                       <div className='text-gray-500'>{btn.usersById.length} thành viên</div>

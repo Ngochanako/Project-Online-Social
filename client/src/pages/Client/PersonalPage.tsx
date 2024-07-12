@@ -20,7 +20,7 @@ export default function PersonalPage() {
     const dispatch=useDispatch();
     //load Page when user is not login or login
     useEffect(()=>{ 
-      axios.get("http://localhost:3000/userLogin")
+      axios.get("http://localhost:3000/userLogin?status=true")
     .then(response=>{
         if(response.data.id!==''){      
         }else{

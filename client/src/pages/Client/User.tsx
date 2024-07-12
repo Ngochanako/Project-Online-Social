@@ -33,7 +33,7 @@ export default function User() {
     });
     const [postsByUser,setPostsByUser]=useState<Post[]>([]);
     useEffect(()=>{ 
-      axios.get("http://localhost:3000/userLogin")
+      axios.get("http://localhost:3000/userLogin?status=true")
     .then(response=>{
         if(response.data.id!==''){      
         }else{
@@ -48,9 +48,11 @@ export default function User() {
       dispatch(getPosts());
     },[])
   useEffect(()=>{
-     const newUser=users.find(btn=>btn.id===id);
-     
-     if(newUser){setUser(newUser)}
+    axios.get(`http://localhost:3000/${id}?status=true`)
+    .then(response=>{
+        setUser(response.data)
+        })
+    .catch(err=>console.log(err))
     
   },[users])
   useEffect(()=>{

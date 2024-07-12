@@ -37,7 +37,7 @@ export default function Login() {
         .catch(err=>console.log(err));
         return;
       }     
-      axios.get(`http://localhost:3000/users?email=${user.email}&password=${user.password}`)
+      axios.get(`http://localhost:3000/users?email=${user.email}&password=${user.password}&status=true`)
       .then((response)=>{       
         if(response.data.length>0){        
           dispatch(setUserLogin(response.data[0]))

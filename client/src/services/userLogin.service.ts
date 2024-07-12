@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 export const getUserLogin:any=createAsyncThunk(
     "users/getUserLogin",
     async()=>{
-        const response=await axios.get("http://localhost:3000/userLogin");
+        const response=await axios.get("http://localhost:3000/userLogin?status=true");
         
         return response.data;
     }

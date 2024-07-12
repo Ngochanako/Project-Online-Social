@@ -4,34 +4,37 @@ import { useDispatch, useSelector } from 'react-redux';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import Pagination from 'react-bootstrap/Pagination';
-import { Post, State } from '../../interfaces';
-import { getPosts, updatePosts } from '../../services/posts.service';
-export default function ManagePosts() {
+import { Group, State } from '../../interfaces';
+import { getGroups, updateGroups } from '../../services/groups.service';
+import { getUsers } from '../../services/users.service';
+export default function ManageGroups() {
     const dispatch=useDispatch();
-    const [posts,setPosts]=useState<Post[]>([])
+    const [groups,setgroups]=useState<Group[]>([])
     const [page,setPage]=useState<number>(1);
     const [totalPages,setTotalPages]=useState<number>(1);
-    const postsAPI=useSelector((state:State)=>state.posts);
+    const groupsAPI=useSelector((state:State)=>state.groups);
+    const users=useSelector((state:State)=>state.users)
     useEffect(()=>{
-      dispatch(getPosts());
+      dispatch(getGroups());
+      dispatch(getUsers())
     },[])
     useEffect(()=>{
-        axios.get(`http://localhost:3000/posts?_page=${page}&_limit=2`)
-        .then(response=>setPosts(response.data))
+        axios.get(`http://localhost:3000/groups?_page=${page}&_limit=2`)
+        .then(response=>setgroups(response.data))
         .catch(err=>console.log(err))
-    },[posts])
+    },[groups])
     //set total Page
     useEffect(()=>{
-       setTotalPages(Math.ceil(postsAPI.length/2))
-    },[postsAPI])
+       setTotalPages(Math.ceil(groupsAPI.length/2))
+    },[groupsAPI])
    //handle Lock Post
-    const handleLockPost=(btn:Post)=>{
-       let newPost={
+    const handleLockGroup=(btn:Group)=>{
+       let newGroup={
         ...btn,
         status:!btn.status
        }
-       dispatch(updatePosts(newPost));
-       console.log(posts.map(item=>item.id===newPost.id?newPost:item));
+       dispatch(updateGroups(newGroup));
+       console.log(groups.map(item=>item.id===newGroup.id?newGroup:item));
     }
     //pagination
     const setPageFirst=()=>{
@@ -85,32 +88,31 @@ export default function ManagePosts() {
                 {/* Content Start */}
                 <section className='bg-white rounded-lg p-[20px] mt-[20px] flex flex-col gap-2'>
                    <p className='text-lg font-bold'>List users</p>
-                   <p className='text'><i className='bx bxs-alarm-exclamation'></i>There are {postsAPI.length} posts to be found </p>
+                   <p className='text'><i className='bx bxs-alarm-exclamation'></i>There are {groupsAPI.length} groups to be found </p>
                    <br />
                    <Table striped bordered hover className='rounded-[5px]'>
                     <thead>
                       <tr>
                         <th>Index</th>
-                        <th>Detail</th>
-                        <th>Image</th>
-                        <th>Create_at</th>
-                        <th>Username</th>
+                        <th>Admin</th>
+                        <th>Avatar</th>
+                        <th>Name</th>
                         <th>Status</th>
                         <th>Activities</th>
                       </tr>
                     </thead>
                     <tbody>
-                        {posts.map((btn,index)=>(
+                        {groups.map((btn,index)=>(
                            <tr key={index}>
                            <td>{index+1}</td>
-                           <td>{btn.detail}</td>
-                           <td><img className='w-[100px] h-[100px] rounded-[5px]' src={btn.images[0]} alt="" /></td>
-                           <td>{btn.fullDate}</td>
-                           <td>{btn.userNameUser}</td>
+                           <td>{users.find(item=>item.id===btn.adminById)?.username}</td>
+                           <td><img className='w-[100px] h-[100px] rounded-[5px]' src={btn.avatar} alt="" /></td>
+                           <td>{btn.groupName}</td>
+                          
                            
                            <td><Button variant={btn.status?"outline-success":"outline-danger"}>{btn.status?'Active':"Disable"}</Button></td>
                            <td className='cursor-pointer'>
-                               {!btn.status?<i onClick={()=>handleLockPost(btn)} className='bx bxs-lock-alt'></i>:<i onClick={()=>handleLockPost(btn)} className='bx bxs-lock-open-alt'></i>}                          
+                               {!btn.status?<i onClick={()=>handleLockGroup(btn)} className='bx bxs-lock-alt'></i>:<i onClick={()=>handleLockGroup(btn)} className='bx bxs-lock-open-alt'></i>}                          
                            </td>
                          </tr>
                         ))}
@@ -139,3 +141,4 @@ export default function ManagePosts() {
     
   )
 }
+

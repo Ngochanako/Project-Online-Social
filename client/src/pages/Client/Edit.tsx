@@ -13,7 +13,7 @@ export default function Edit() {
     const [user,setUser]=useState<User>(userOnline);
     useEffect(()=>{
         dispatch(getUserLogin());
-        axios.get("http://localhost:3000/userLogin")
+        axios.get("http://localhost:3000/userLogin?status=true")
             .then(response=>{
                 if(response.data.id!==''){  
                     setUser(response.data);    

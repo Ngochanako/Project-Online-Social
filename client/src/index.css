@@ -160,10 +160,6 @@ input:focus{
      background-color: rgb(31,41,55);
      color: white;
  }
- .item-header-left.active{
-     background-color: rgb(31,41,55);
-     color: white;
- }
  th,td{
     text-align: center;
  }
