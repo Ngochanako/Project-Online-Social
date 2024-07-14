@@ -49,9 +49,18 @@ export type User={
 }
 export type Modal={
     comments:boolean,
-    avatar:boolean,
-    post:boolean,
-    uploadPost:boolean,
+    avatar:{
+        type:string,
+        status:boolean,
+    },
+    post:{
+        type:string,
+        status:boolean,
+    },
+    uploadPost:{
+        type:string,
+        status:boolean,
+    },
     updatePost:boolean,
     delete:boolean,
     editPost:boolean,
@@ -80,5 +89,6 @@ export type State={
     commentsParent:CommentParent[],
     userAdmin:User,
     groups:Group[],
-    group:Group
+    group:Group,
+    loading:boolean
 }

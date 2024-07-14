@@ -9,16 +9,27 @@ import { getUserLogin } from '../services/userLogin.service';
 import { setPost } from '../store/reducers/PostReducer';
 import { convertTime } from '../interfaces/convertTime';
 import { getCommentsChild } from '../services/commentsChild.service';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { getUsers } from '../services/users.service';
+import axios from 'axios';
 export default function Posts() {
      //Initialization
+     const navigate=useNavigate()
      const users:User[]=useSelector((state:State)=>state.users);
      const postsLocal:Post[]=useSelector((state:State)=>state.posts);
      const userOnline:User=useSelector((state:State)=>state.userLogin);
      const dispatch=useDispatch();
      const [posts,setPosts]=useState<Post[]>([]);
      const commentsChild:CommentChild[]=useSelector((state:State)=>state.commentsChild);
+     useEffect(()=>{ 
+      axios.get(`http://localhost:3000/users/${userOnline.id}`)
+    .then(response=>{
+        if(response.data.id==''||response.data.status==false){
+           navigate('/preLogin')        
+        }
+        })
+    .catch(err=>console.log(err))
+    })
      //get userOnline from API
      useEffect(()=>{
         dispatch(getUserLogin())
@@ -30,10 +41,17 @@ export default function Posts() {
      },[])
      //set Posts from postsLocal
       useEffect(()=>{
+        // list users that userOnline follow
         let newUsersFollow:User[]=users.filter(btn=>btn.followersById.includes(userOnline.id));
         newUsersFollow.push(userOnline);
+        //list posts that userOnline follow
         let newPostsFollowUsersSortByDateAsc=postsLocal.filter(btn=>newUsersFollow.find(item=>item.id===btn.idUser)).sort((a,b)=>b.date-a.date);
-        let newPostsUnFollowUsersSortByDateAsc=postsLocal.filter(btn=>!newUsersFollow.find(item=>item.id===btn.idUser)&&btn.idUser!==userOnline.id).sort((a,b)=>b.date-a.date);
+        //list posts that userOnline unfollow
+        const newUsersUnFollow:User[]=users.filter(btn=>!btn.followersById.includes(userOnline.id)&&btn.id!==userOnline.id);
+
+        let newPostsUnFollowUsersSortByDateAsc=postsLocal.filter(btn=>newUsersUnFollow.find(item=>item.private==false&&item.id===btn.idUser)).sort((a,b)=>b.date-a.date);
+        //sort post by Date desc
+        
         let newPostsSortByDate=[...newPostsFollowUsersSortByDateAsc,...newPostsUnFollowUsersSortByDateAsc];
         setPosts(newPostsSortByDate);
       },[postsLocal,userOnline,users])
@@ -41,6 +59,9 @@ export default function Posts() {
       const returnStatusFollow=(id:string)=>{
          let userOfPost=users.find(btn=>btn.id==id);
          if(userOfPost){
+            if(userOfPost.id===userOnline.id){
+              return '';
+            }
             if(userOfPost.requestFollowById.includes(userOnline.id)){
               return 'Đã gửi yêu cầu theo dõi'
             }
@@ -125,7 +146,8 @@ export default function Posts() {
                   {btn.images.length==1?(
                     <img className='d-block w-100 max-h-[400px] object-cover' src={btn.images[0]} alt="" />
                   ):(
-                    <Carousel data-bs-theme="dark" className='mt-[20px]'>
+                    <div style={{position:'relative',zIndex:'-1'}}>
+                    <Carousel data-bs-theme="dark" className=' mt-[20px] '>
                       {btn.images.map((item,index)=>(
                         <Carousel.Item key={index} className=''>
                           <img
@@ -138,6 +160,7 @@ export default function Posts() {
                       ))}
                     
                     </Carousel>
+                    </div>
                   )}
                    {/* favourist and comments start */}
                     <div className='flex flex-col gap-[10px] mt-[20px]'>

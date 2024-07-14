@@ -13,31 +13,18 @@ export default function Instagram() {
     const navigate=useNavigate();
     const dispatch=useDispatch();
     const [usersUnFolow,setUsersUnFollow]=useState<User[]>([]);
-    const [user,setUser]=useState<User>({
-      id:'',
-      username:'',
-      password:'',
-      email:'',
-      avatar:'',
-      biography:'',
-      gender:'',
-      postsById:[],
-      followersById:[],
-      status:true,
-      private:false,
-      requestFollowById:[]
-    });
-   // get Users from API
-    useEffect(()=>{
-      dispatch(getUsers());
-      axios.get("http://localhost:3000/userLogin")
+    useEffect(()=>{ 
+      axios.get(`http://localhost:3000/users/${userOnline.id}`)
     .then(response=>{
-        if(response.data.id!==''){      
-        }else{
-            navigate('/preLogin')           
+        if(response.data.id==''||response.data.status==false){
+           navigate('/preLogin')        
         }
         })
     .catch(err=>console.log(err))
+    })
+   // get Users from API
+    useEffect(()=>{
+      dispatch(getUsers());
     },[])
     //get usersUnFollow
     useEffect(()=>{
@@ -46,20 +33,18 @@ export default function Instagram() {
       setUsersUnFollow(newUsers);     
     },[users,userOnline])
     // follow User
-    const followUser=(id:string)=>{
+    const followUser=(btn:User)=>{
+          if(btn.requestFollowById.includes(userOnline.id)){
+            return;
+          }
         //get User from users
-        const userFollow=users.find(btn=>btn.id===id);
-        if(userFollow){
           const newUser={
-            ...userFollow,
-            requestFollowById:[...userFollow.requestFollowById,userOnline.id]
+            ...btn,
+            requestFollowById:[...btn.requestFollowById,userOnline.id]
            }
-           setUser(newUser);
+           setUsersUnFollow(usersUnFolow.map( btn=>btn.id==newUser.id?newUser:btn))
            dispatch(updateFollowersUser(newUser));
-            dispatch(updateFollowersUserLogin(newUser));
-            dispatch(setUserLogin(newUser));
         }      
-    }
   return (
     <div className='flex ml-[230px]' >
           {/* Posts start */}
@@ -91,7 +76,7 @@ export default function Instagram() {
                         <p className='text-gray-400 text-[14px] font-normal'> Gợi ý cho bạn</p>
                      </div>
                  </div>
-                 <a onClick={()=>followUser(btn.id)} className='text-orange-600 text-[14px] cursor-pointer'>{user.followersById.includes(btn.id)?"Đang theo dõi":'Theo dõi'}</a>
+                 <a onClick={()=>followUser(btn)} className='text-orange-600 text-[14px] cursor-pointer'>{btn.requestFollowById.includes(userOnline.id)?"Đã gửi yêu cầu theo dõi":'Theo dõi'}</a>
             </div>
               ))}
           </div>

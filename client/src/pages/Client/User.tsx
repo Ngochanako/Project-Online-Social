@@ -33,22 +33,21 @@ export default function User() {
     });
     const [postsByUser,setPostsByUser]=useState<Post[]>([]);
     useEffect(()=>{ 
-      axios.get("http://localhost:3000/userLogin?status=true")
-    .then(response=>{
-        if(response.data.id!==''){      
-        }else{
-            navigate('/preLogin')           
-        }
-        })
-    .catch(err=>console.log(err))
-    },[])    
+      axios.get(`http://localhost:3000/users/${userOnline.id}`)
+      .then(response=>{
+          if(response.data.id==''||response.data.status==false){
+             navigate('/preLogin')        
+          }
+          })
+      .catch(err=>console.log(err))
+      },[users,userOnline])
     useEffect(()=>{
       dispatch(getUserLogin());
       dispatch(getUsers());
       dispatch(getPosts());
     },[])
   useEffect(()=>{
-    axios.get(`http://localhost:3000/${id}?status=true`)
+    axios.get(`http://localhost:3000/users/${id}?status=true`)
     .then(response=>{
         setUser(response.data)
         })

@@ -8,7 +8,7 @@ import { State, User } from '../../interfaces';
 import { setAdmin } from '../../services/userAdmin.service';
 import { setUserLogin } from '../../services/userLogin.service';
 import { resetUser } from '../../store/reducers/UserReducer';
-
+import bcrypt from 'bcryptjs-react'
 export default function Login() {
   //Initiliazation
    const dispatch=useDispatch();
@@ -16,6 +16,7 @@ export default function Login() {
    const userAPI=useSelector((state:State)=>state.user);
    const [user,setUser]=useState<User>(userAPI);
    const [error,setError]=useState<string>('');
+   const [hidePass,setHidePass]=useState<string>('password')
    //handle Change Input
    const handleChange=(e:React.ChangeEvent<HTMLInputElement>)=>{
      const {name,value}=e.target;
@@ -24,39 +25,63 @@ export default function Login() {
    //login
    const login=(e:React.FormEvent)=>{
       e.preventDefault();
-      if(user.email==='admin@gmail.com'&&user.password==='Abc123'){
-        axios.get("http://localhost:3000/users?email=admin@gmail.com&password=Abc123")
+      if(user.email==='ad@gmail.com'){
+        axios.get("http://localhost:3000/users?email=ad@gmail.com")
         .then((response)=>{
           if(response.data.length>0){
-            dispatch(setAdmin(response.data[0]));
-            setTimeout(()=>{
-               navigate('/admin');
-            },1000)
+            console.log(response.data[0]);
+            
+            let decryptpassword:boolean=bcrypt.compareSync(user.password,response.data[0].password);
+            console.log(decryptpassword);
+            
+            if(decryptpassword){
+                dispatch(setAdmin(response.data[0]));
+                setTimeout(()=>{
+                  navigate('/admin');
+                },1000)
+                
+            }
           }
         })
         .catch(err=>console.log(err));
         return;
       }     
-      axios.get(`http://localhost:3000/users?email=${user.email}&password=${user.password}&status=true`)
-      .then((response)=>{       
-        if(response.data.length>0){        
-          dispatch(setUserLogin(response.data[0]))
-          dispatch(resetUser());
-          setTimeout(()=>{
-            navigate('/');
-          },1000)
+      axios.get(`http://localhost:3000/users?email=${user.email}`)
+      .then((response)=>{ 
+   
+        if(response.data.length>0){  
+          if(response.data[0].status==true){
+            let decryptpassword:boolean =  bcrypt.compareSync(user.password,response.data[0].password)
+            if(decryptpassword){
+              dispatch(setUserLogin(response.data[0]))
+              dispatch(resetUser());
+              setTimeout(()=>{
+                navigate('/');
+              },1000)
+            }else{
+              setError('Password or Email is incorrect')
+            }            
           }else{
-            setError('Password or Email is incorrect')
+            setError('Email has been locked')
+          }                     
+          }else{
+            setError('Email has not been registered')
           }
       })
       .catch( err=>console.log(err))
+   }
+   //hide Password
+   const handleHidePass=()=>{
+      setHidePass(hidePass=='password'?'text':'password')
    }
   return (
     <div className='register flex items-center justify-center text-[14px]'>
       <div className='w-[350px] border-gray-300 h-[400px] border-solid border-1 p-[50px] flex flex-col gap-[20px] mt-[20px]'>
         <form action="" className='flex flex-col gap-[10px]'>
             <input required onChange={handleChange} name='email' type="email" placeholder='Email' value={user.email} />
-            <input required onChange={handleChange} name='password' type="password" placeholder='Password' value={user.password}/>
+            
+            <input required onChange={handleChange} name='password' type={hidePass} placeholder='Password'/>
+            <i onClick={handleHidePass} className="fa-solid fa-eye-slash absolute top-[135px] right-[520px] cursor-pointer"></i>
             <Form.Text className="text-muted">
                   <span className='text-red-500'> {error}</span>
             </Form.Text>

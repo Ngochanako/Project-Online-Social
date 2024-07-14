@@ -3,9 +3,18 @@ import { Modal } from "../../interfaces";
 
 const initialModal:Modal={
     comments:false,
-    avatar:false,
-    post:false,
-    uploadPost:false,
+    avatar:{
+        type:'',
+        status:false,
+    },
+    post:{
+        type:'',
+        status:false,
+    },
+    uploadPost:{
+        type:'',
+        status:false
+    },
     updatePost:false,
     delete:false,
     editPost:false,
@@ -21,23 +30,23 @@ const modalReducer=createSlice({
         disableModalAllComment:(state)=>{
             state.comments=false;
         },
-        activeModalAvatar:(state)=>{
-            state.avatar=true;
+        activeModalAvatar:(state,action)=>{
+            state.avatar=action.payload           
         },
-        disableModalAvatar:(state)=>{
-            state.avatar=false;
+        disableModalAvatar:(state,action)=>{
+            state.avatar= action.payload
         },
-        activeModalPost:(state)=>{
-            state.post=true;
+        activeModalPost:(state,action)=>{
+            state.post=action.payload;
         },
-        disableModalPost:(state)=>{           
-            state.post=false;
+        disableModalPost:(state,action)=>{           
+            state.post=action.payload;
         },
-        activeModalUploadPost:(state)=>{
-            state.uploadPost=true;
+        activeModalUploadPost:(state,action)=>{
+            state.uploadPost= action.payload
         },
-        disableModalUploadPost:(state)=>{
-            state.uploadPost=false;
+        disableModalUploadPost:(state,action)=>{
+            state.uploadPost= action.payload
         },
         activeModalUpdatePost:(state)=>{
             state.updatePost=true;

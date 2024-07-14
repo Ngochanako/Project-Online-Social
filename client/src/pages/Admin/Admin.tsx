@@ -17,7 +17,7 @@ export default function AdminPage() {
   useEffect(()=>{
     axios.get("http://localhost:3000/userAdmin")
     .then(response=>{
-        if(response.data.id!=='a1'){
+        if(response.data.id!=='bdfbfb13-5a2e-4008-8862-ef8084952b95'){
            navigate('/login')
         }
     })

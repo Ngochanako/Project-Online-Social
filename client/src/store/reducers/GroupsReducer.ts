@@ -22,6 +22,7 @@ const groupsReducer=createSlice(
                 return action.payload;
             })
             .addCase(updateGroups.fulfilled,(state,action)=>{
+                console.log(action.payload)
                 return state.map(btn=>btn.id===action.payload.id?action.payload:btn)
             })
         },

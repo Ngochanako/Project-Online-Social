@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { setUser } from '../../store/reducers/UserReducer';
 import axios from 'axios';
 import { State, User } from '../../interfaces';
-
+import bcrypt from 'bcryptjs-react'
 export default function Register() {
   //Initialization
   const navigate=useNavigate();
@@ -124,7 +124,8 @@ export default function Register() {
       return;
     }
     // register 
-     const newUser:User={...user,id:uuidv4(),avatar:'https://cellphones.com.vn/sforum/wp-content/uploads/2023/10/avatar-trang-4.jpg'};
+     let cryptPassword=bcrypt.hashSync(user.password,10);
+     const newUser:User={...user,id:uuidv4(),avatar:'https://cellphones.com.vn/sforum/wp-content/uploads/2023/10/avatar-trang-4.jpg',password:cryptPassword};
      dispatch(registerUser(newUser));
      dispatch(setUser(newUser));
      setTimeout(() => {

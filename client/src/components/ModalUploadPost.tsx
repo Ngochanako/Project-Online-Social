@@ -19,6 +19,10 @@ export default function ModalUploadPost() {
     const previewImages=useSelector((state:State)=>state.previewImages)
     const imagesPost=useSelector((state:State)=>state.imagesPost);
     const [contentPost,setContentPost]=useState<string>('');
+    const modalUploadPost=useSelector((state:State)=>state.modal.uploadPost);
+    const group=useSelector((state:State)=>state.group)
+    console.log(group);
+    
     //load Page when user is not login or login
     useEffect(()=>{
        dispatch(getUserLogin())
@@ -32,7 +36,7 @@ export default function ModalUploadPost() {
        .catch(err=>console.log(err))
     },[])
     const closeModal=()=>{
-        dispatch(disableModalUploadPost());
+        dispatch(disableModalUploadPost({type:'',status:false}));
     }
     //get count Char
     const handleChange=(e:React.ChangeEvent<HTMLTextAreaElement>)=>{
@@ -48,6 +52,7 @@ export default function ModalUploadPost() {
             {              
              newImgs.push(url); 
              if(newImgs.length===imagesPost.length){
+              if(modalUploadPost.type==='personal'){
               let newPost:Post={
                 id:uuidv4(),
                 idUser:userOnline.id,
@@ -66,8 +71,31 @@ export default function ModalUploadPost() {
                dispatch(setUserLogin(editUser));
                dispatch(updateUser(editUser));
                dispatch(addNewPost(newPost));
-               dispatch(disableModalUploadPost());
-             }                            
+               dispatch(disableModalUploadPost({type:'',status:false}));
+             } else if(modalUploadPost.type==='group'){
+              console.log(3);
+              
+              let newPost:Post={
+                id:uuidv4(),
+                idUser:userOnline.id,
+                avatarUser:userOnline.avatar,
+                userNameUser:userOnline.username,
+                detail:contentPost,
+                date:new Date().getTime(),
+                fullDate:new Date().toISOString().split('T')[0],
+                images:newImgs,
+                commentsById:[],
+                favouristUsersById:[],
+                idGroup:group.id,
+                status:true 
+               }  
+               let editUser:User={...userOnline,postsById:[...userOnline.postsById,newPost.id]};      
+               dispatch(setUserLogin(editUser));
+               dispatch(updateUser(editUser));
+               dispatch(addNewPost(newPost));
+               dispatch(disableModalUploadPost({type:'',status:false}));     
+             }  
+            }                         
             }
        )
       }       

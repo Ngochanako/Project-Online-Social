@@ -3,12 +3,14 @@ import { useDispatch, useSelector } from 'react-redux'
 import { activeModalUploadPost, disableModalPost, disableModalUploadPost } from '../store/reducers/ModalReducer';
 import { setPreviewImages } from '../store/reducers/PreviewImagesReducer';
 import { setImagesPost } from '../store/reducers/ImagesPostReducer';
+import { State } from '../interfaces';
 
 export default function ModalCreatePost() {
     const [images, setImages] = useState<any[]>([]);
+    const modalCreatePost=useSelector((state:State)=>state.modal.post)
     const dispatch=useDispatch();
     const closeModal=()=>{
-        dispatch(disableModalPost());
+        dispatch(disableModalPost({type:'',status:false}));
     }
     const handleChange=(e:React.ChangeEvent<HTMLInputElement>)=>{
         const files = e.target.files;
@@ -22,8 +24,15 @@ export default function ModalCreatePost() {
             }           
             dispatch(setImagesPost(images)) 
             dispatch(setPreviewImages(newPreviewImages));
-            dispatch(disableModalPost());
-            dispatch(activeModalUploadPost());
+            if(modalCreatePost.type=='personal'){
+                dispatch(disableModalPost({type:'personal',status:false}));
+                dispatch(activeModalUploadPost({type:'personal',status:true}));
+            }else if(modalCreatePost.type=='group'){
+                dispatch(disableModalPost({type:'group',status:false}));
+                dispatch(activeModalUploadPost({type:'group',status:true}));
+            }
+            
+            
         } 
     }
   return (

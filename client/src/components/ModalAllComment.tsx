@@ -17,6 +17,7 @@ export default function ModalAllComment() {
     const userOnline=useSelector((state:State)=>state.userLogin)
     const dispatch=useDispatch();
     const post:Post=useSelector((state:State)=>state.post);
+    const [valueUserName,setValueUserName]=useState<string>('')
     const [user,setUser]=useState<any>({
         id:'',
         username:'',
@@ -111,6 +112,8 @@ export default function ModalAllComment() {
     // post Comment
     const postComment=(e:React.FormEvent)=>{
         e.preventDefault();
+        console.log(typeCommentPost.type);
+        
         if(typeCommentPost.type==''){
             let newComment:CommentParent={
                 id:uuidv4(),
@@ -158,13 +161,21 @@ export default function ModalAllComment() {
     const replyComment=(idComment:string,usernameParent:string)=>{
         setTypeCommentPost({type:'replyParent',id:idComment,userName:usernameParent});
         setValueComment(`@${usernameParent} `);
+        setValueUserName(`@${usernameParent} `)
     }
     //open Modal Update Post
     const openModalUpdatePost=()=>{
         dispatch(activeModalUpdatePost())
     }
-    console.log(user);
-    
+    //handle text in area
+    const handleKeyDown = (event:React.KeyboardEvent<HTMLTextAreaElement>) => {
+        if (event.key === 'Backspace'&&valueComment===valueUserName) {
+          // Xóa toàn bộ đoạn text khi nhấn Backspace
+          setValueComment('');
+          setTypeCommentPost({type:'',id:'',userName:''})
+          event.preventDefault();
+        }
+      };
   return (
     <div className='modal'>
         <div onClick={closeModal} className='modal-close'></div>
@@ -274,7 +285,7 @@ export default function ModalAllComment() {
                 {/* Comment */}
                 <form className=''>
                     <div className='flex items-center justify-between gap-[10px]'>
-                    <textarea onChange={handleChangeComment} value={valueComment} className=' resize-none text-[14px] placeholder:italic placeholder:text-slate-400 block w-full border border-slate-300 rounded-md py-2 pl-9 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm w-[80%] max-h-[100px]' placeholder='Thêm bình luận' />
+                    <textarea   onKeyDown={handleKeyDown} onChange={handleChangeComment} value={valueComment} className=' resize-none text-[14px] placeholder:italic placeholder:text-slate-400 block w-full border border-slate-300 rounded-md py-2 pl-9 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm w-[80%] max-h-[100px]' placeholder='Thêm bình luận' />
                     <button onClick={postComment} className='bg-[rgb(79,70,229)] text-white p-[5px] rounded-[5px] text-[14px] hover:bg-purple-500'>Đăng</button>
                     </div>             
                 </form>

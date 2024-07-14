@@ -87,7 +87,7 @@ export default function ManageGroups() {
             <article className='py-[20px] px-[50px] bg-zinc-200 min-h-[600px]'>
                 {/* Content Start */}
                 <section className='bg-white rounded-lg p-[20px] mt-[20px] flex flex-col gap-2'>
-                   <p className='text-lg font-bold'>List users</p>
+                   <p className='text-lg font-bold'>List groups</p>
                    <p className='text'><i className='bx bxs-alarm-exclamation'></i>There are {groupsAPI.length} groups to be found </p>
                    <br />
                    <Table striped bordered hover className='rounded-[5px]'>

@@ -17,10 +17,10 @@ export const getGroups:any=createAsyncThunk(
     }
 )
 export const updateGroups:any=createAsyncThunk(
-    "posts/updatePosts",
+    "groups/updateGroups",
     async(group:Group)=>{
-        const response=await axios.put(`http://localhost:3000/posts/${group.id}`,group);
-        
+        const response=await axios.put(`http://localhost:3000/groups/${group.id}`,group);
+        console.log(response.data)
         return response.data;
     }
 )

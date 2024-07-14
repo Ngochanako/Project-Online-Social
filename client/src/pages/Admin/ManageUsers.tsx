@@ -69,8 +69,9 @@ export default function ManageUsers() {
     }
     //block or unlock user
     const handleLockUser=(btn:User)=>{
-        dispatch(updateUser({...btn,status:!btn.status}));
-        setUsersAdmin(users.map(item=>item.id==btn.id?btn:item))
+        let newUser={...btn,status:!btn.status}
+        dispatch(updateUser(newUser));
+        setUsersAdmin(users.map(item=>item.id==btn.id?newUser:item))
     }
     //handle Change Value Input
     const handleChange=(e:React.ChangeEvent<HTMLInputElement>)=>{

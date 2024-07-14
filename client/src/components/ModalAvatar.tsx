@@ -4,27 +4,38 @@ import { disableModalAvatar } from '../store/reducers/ModalReducer';
 import { ref,uploadBytes,getDownloadURL } from 'firebase/storage';
 import { storage } from '../config/firebase';
 import { updateUser } from '../services/users.service';
-import { State, User } from '../interfaces';
+import { Group, State, User } from '../interfaces';
 import { setUserLogin } from '../services/userLogin.service';
+import { updateGroups } from '../services/groups.service';
+import { activeLoading, disableLoading } from '../store/reducers/LoadingReducer';
 export default function ModalAvatar() {
     const dispatch=useDispatch();
     const userOnline:User=useSelector((state:State)=>state.userLogin);
+    const modalAvatar=useSelector((state:State)=>state.modal.avatar)
+    const group=useSelector((state:State)=>state.group)
     const closeModal=()=>{
-        dispatch(disableModalAvatar())
+        dispatch(disableModalAvatar({type:'',status:false}))
     }
     //upload img Avatar
     const handleChange=(e:React.ChangeEvent<HTMLInputElement>)=>{
+      dispatch(activeLoading())
       const value:any=e.target.files?.[0]
       const imageRef=ref(storage,`imagesPost/${value.name}`)
       uploadBytes(imageRef, value).then((snapshot) => getDownloadURL(snapshot.ref))
      .then((url) =>
-          {
-            const userUpdate:User={...userOnline,avatar:url}
-            dispatch(updateUser(userUpdate));
-            dispatch(setUserLogin(userUpdate));       
+          { 
+            if(modalAvatar.type=='personal'){
+              const userUpdate:User={...userOnline,avatar:url}
+              dispatch(updateUser(userUpdate));
+              dispatch(setUserLogin(userUpdate)); 
+            }else if(modalAvatar.type=='group'){
+              const groupUpdate:Group={...group,avatar:url}
+              dispatch(updateGroups(groupUpdate));
+            }
+            dispatch(disableLoading())     
           }
      )
-     dispatch(disableModalAvatar())
+     dispatch(disableModalAvatar({type:'',status:false}))
     }
   return (
     <div className='modal'>

@@ -34,6 +34,16 @@ export default function Home() {
     const [search,setSearch]=useState<Boolean>(false);
     const [requestFollow,setRequestFollow]=useState<Boolean>(false);
     const [usersRequestFollow,setUsersRequest]=useState<User[]>([]);
+    //check login
+    useEffect(()=>{ 
+      axios.get(`http://localhost:3000/users/${userOnline.id}`)
+    .then(response=>{
+        if(response.data.id==''||response.data.status==false){
+           navigate('/preLogin')        
+        }
+        })
+    .catch(err=>console.log(err))
+    })
     //get UserLogin
     useEffect(()=>{
       dispatch(getUserLogin())
@@ -74,7 +84,7 @@ export default function Home() {
 }
 //open modal create Post
   const openModalPost=()=>{
-    dispatch(activeModalPost());
+    dispatch(activeModalPost({type:'personal',status:true}));
   }
   //search User
   const handleSearch=(e:React.ChangeEvent<HTMLInputElement>)=>{
@@ -120,12 +130,12 @@ export default function Home() {
     <div className=''>
       
        {modalAllComment &&<ModalAllComment/>}
-        {modalPost && <ModalCreatePost/>}
-        {modalUploadPost && <ModalUploadPost/>}
+        {modalPost.status && <ModalCreatePost/>}
+        {modalUploadPost.status && <ModalUploadPost/>}
         {modalUpdatePost&&<ModalUpdatePost/>}
         {modalDelete&&<ModalDelete/>}
         {modalEditPost&&<ModalEditPost/>}
-        {modalAvatar&&<ModalAvatar/>}
+        {modalAvatar.status&&<ModalAvatar/>}
         {/* Header left start */}
       <header className='header-left  p-[30px] fixed'>
         <div className='header-list-item mb-[30px]'>
@@ -137,11 +147,11 @@ export default function Home() {
           <i className="fa-solid fa-house text-[#565555] text-[22px]"></i>
           <div>Trang chủ</div>
         </NavLink>
-        <div onClick={openSearch} className='header-list-item'>
+        <div  className='header-list-item'>
           <i className="fa-solid fa-magnifying-glass text-[#565555] text-[22px]"></i>
-          <div  className=''>Tìm kiếm</div>
+          <div onClick={openSearch}  className=''>Tìm kiếm</div>
           {search&&
-          <div className="absolute z-1000 top-0 left-20 w-[400px] h-[99%]  bg-white flex flex-col gap-[50px] rounded-r-[10px] shadow-lg">
+          <div className="absolute z-1000 top-0 left-20 w-[400px] h-[99%]  bg-white flex flex-col gap-[50px] rounded-r-[10px] shadow-lg z-[10]">
             <i onClick={closeSearch} className="fa-solid fa-xmark z-3 text-[30px] cursor-pointer text-gray-600 top-[20px] right-[20px] absolute"></i>
               <div className="text-[20px] font-bold px-[50px] pt-[50px]">Tìm kiếm</div>
               <input onChange={handleSearch} type="text" className="mx-[50px] bg-[rgb(239,239,239)] p-[10px] text-[14px]" placeholder="Tìm kiếm người dùng" />
@@ -167,7 +177,7 @@ export default function Home() {
           {userOnline.requestFollowById.length>0&&<div className="w-[20px] h-[20px] rounded-[50%] bg-red-500 text-white flex justify-center items-center absolute right-[190px] top-[220px]">{userOnline.requestFollowById.length}</div>}
           
           {requestFollow&&
-          <div className="absolute z-1000 top-0 left-20 w-[400px] h-[99%]  bg-white flex flex-col gap-[50px] rounded-r-[10px] shadow-lg">
+          <div className="absolute z-[1000] top-0 left-20 w-[400px] h-[99%]  bg-white flex flex-col gap-[50px] rounded-r-[10px] shadow-lg">
             <i onClick={closeRequestFollow} className="fa-solid fa-xmark z-3 text-[30px] cursor-pointer text-gray-600 top-[20px] right-[20px] absolute"></i>
               <div className="text-[20px] font-bold px-[50px] pt-[50px]">Yêu cầu theo dõi</div>
               <hr className=""/>

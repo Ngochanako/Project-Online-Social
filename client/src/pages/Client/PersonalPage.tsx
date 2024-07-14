@@ -11,24 +11,26 @@ import { getUserLogin } from '../../services/userLogin.service';
 import { getUsers } from '../../services/users.service';
 import { getPosts } from '../../services/posts.service';
 import { setPost } from '../../store/reducers/PostReducer';
+import { activeLoading } from '../../store/reducers/LoadingReducer';
+
 export default function PersonalPage() {
     const userOnline:User=useSelector((state:State)=>state.userLogin);
     const users:User[]=useSelector((state:State)=>state.users);
     const posts=useSelector((state:State)=>state.posts);
     const [postsByUserOnline,setPostsByUserOnline]=useState<Post[]>([]);
+    const loading=useSelector((state:State)=>state.loading);
     const navigate=useNavigate();
     const dispatch=useDispatch();
     //load Page when user is not login or login
     useEffect(()=>{ 
-      axios.get("http://localhost:3000/userLogin?status=true")
-    .then(response=>{
-        if(response.data.id!==''){      
-        }else{
-            navigate('/preLogin')           
-        }
-        })
-    .catch(err=>console.log(err))
-    },[])
+      axios.get(`http://localhost:3000/users/${userOnline.id}`)
+      .then(response=>{
+          if(response.data.id==''||response.data.status==false){
+             navigate('/preLogin')        
+          }
+          })
+      .catch(err=>console.log(err))
+      },[])
      
     useEffect(()=>{
       dispatch(getUserLogin())
@@ -52,12 +54,12 @@ export default function PersonalPage() {
     },[posts,userOnline])      
     // open modal change Avatar
     const openModalAvatar=()=>{
-      dispatch(activeModalAvatar());
+      dispatch(activeModalAvatar({type:'personal',status:true}));
     }
     //open Modal Post
     const openModalPost=(idPost:string)=>{
-        axios.get(`http://localhost:3000/posts?id=${idPost}`)
-        .then(response=>dispatch(setPost(response.data[0])))
+        axios.get(`http://localhost:3000/posts/${idPost}`)
+        .then(response=>dispatch(setPost(response.data)))
         .then(()=>dispatch(activeModalAllComment()))
         .catch(err=>console.log(err))
     }
@@ -66,6 +68,7 @@ export default function PersonalPage() {
     <div className='p-[50px] ml-[230px]'>
       
         <header className='px-[40px] flex gap-[80px] items-center'>
+        {loading&&<div className='loader absolute top-[100px] right-[850px] '></div>}
             <img onClick={openModalAvatar} className='cursor-pointer w-[150px] h-[150px] rounded-[50%]' src={userOnline.avatar} alt="" />
             <div className='flex flex-col gap-[30px]'>
                 <div className='flex gap-[20px] items-center'>
